@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>曾信士先生 長照守則智慧助手 — 爸爸照護小幫手</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Noto Sans TC & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+  <!-- Phosphor Icons CDN -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Noto Sans TC"', '"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              200: '#a7f3d0',
+              300: '#6ee7b7',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+            },
+            warm: {
+              50: '#fffbeb',
+              100: '#fef3c7',
+              500: '#f59e0b',
+              600: '#d97706',
+            },
+            coral: {
+              50: '#fff1f2',
+              100: '#ffe4e6',
+              500: '#f43f5e',
+              600: '#e11d48',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+    .chat-bubble-adi {
+      position: relative;
+    }
+    .chat-bubble-adi::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 14px;
+      width: 0;
+      height: 0;
+      border-top: 6px solid transparent;
+      border-bottom: 6px solid transparent;
+      border-right: 8px solid white;
+    }
+    .chat-bubble-user::after {
+      content: '';
+      position: absolute;
+      right: -6px;
+      top: 14px;
+      width: 0;
+      height: 0;
+      border-top: 6px solid transparent;
+      border-bottom: 6px solid transparent;
+      border-left: 8px solid #10b981;
+    }
+    .tab-active {
+      background-color: white;
+      color: #047857;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col font-sans">
+
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm transition-all">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-brand-600 to-emerald-400 flex items-center justify-center text-white shadow-md shadow-emerald-200">
+          <i class="ph-bold ph-heartbeat text-2xl"></i>
+        </div>
+        <div>
+          <div class="flex items-center space-x-2">
+            <h1 class="text-base sm:text-lg font-bold text-slate-800 leading-tight">曾信士 照護守則</h1>
+            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1.5 animate-pulse"></span>
+              爸爸照護小幫手 在線中
+            </span>
+          </div>
+          <p class="text-xs text-slate-500">交接不漏接 • 智能答詢 • SOP 速查</p>
+        </div>
+      </div>
+
+      <div class="flex items-center space-x-2">
+        <!-- Quick Alert Modal Button -->
+        <button onclick="toggleModal('urgentNoticeModal')" class="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-amber-50 text-amber-700 hover:bg-amber-100 border border-amber-200/80 text-xs sm:text-sm font-semibold transition-colors">
+          <i class="ph-fill ph-bell-ringing text-amber-600 text-base"></i>
+          <span>本日交接提醒</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-6xl w-full mx-auto p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+    <!-- LEFT COLUMN: Chat Assistant "爸爸照護小幫手" (5 Cols on LG) -->
+    <section class="lg:col-span-5 flex flex-col h-[650px] lg:h-[calc(100vh-6.5rem)] sticky lg:top-20 bg-white rounded-3xl shadow-sm border border-slate-200/90 overflow-hidden">
+      <!-- Assistant Header inside card -->
+      <div class="px-5 py-4 bg-gradient-to-r from-emerald-500 via-teal-600 to-emerald-700 text-white flex items-center justify-between shadow-inner">
+        <div class="flex items-center space-x-3">
+          <div class="relative">
+            <div class="w-11 h-11 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center text-white text-2xl border border-white/30">
+              🩺
+            </div>
+            <span class="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-green-400 border-2 border-white rounded-full"></span>
+          </div>
+          <div>
+            <div class="flex items-center space-x-2">
+              <h2 class="font-bold text-base">爸爸照護小幫手</h2>
+              <span class="text-[10px] bg-white/20 px-2 py-0.5 rounded-full uppercase tracking-wider font-semibold">AI Bot</span>
+            </div>
+            <p class="text-xs text-emerald-100">隨時問我：吃藥、作息、布丁吞嚥、針灸</p>
+          </div>
+        </div>
+        <button onclick="clearChatHistory()" class="text-white/80 hover:text-white p-1.5 rounded-lg hover:bg-white/10 transition" title="清空對話">
+          <i class="ph-bold ph-arrow-counter-clockwise text-lg"></i>
+        </button>
+      </div>
+
+      <!-- Quick Prompt Suggestion Chips -->
+      <div class="p-3 bg-slate-50/90 border-b border-slate-100 flex items-center space-x-1.5 overflow-x-auto text-xs no-scrollbar">
+        <span class="text-slate-600 font-semibold flex-shrink-0 flex items-center pl-1">
+          <i class="ph-bold ph-lightning text-amber-500 mr-1"></i>快捷問：
+        </span>
+        <button onclick="sendQuickMessage('作息時間表')" class="px-2.5 py-1 rounded-full bg-white hover:bg-emerald-50 text-slate-600 hover:text-emerald-700 border border-slate-200 flex-shrink-0 transition-colors">
+          🕒 完整作息
+        </button>
+        <button onclick="sendQuickMessage('溶血藥跟胃藥怎麼吃？')" class="px-2.5 py-1 rounded-full bg-white hover:bg-emerald-50 text-slate-600 hover:text-emerald-700 border border-slate-200 flex-shrink-0 transition-colors">
+          💊 吃藥/溶血藥
+        </button>
+        <button onclick="sendQuickMessage('布丁吞嚥訓練步驟')" class="px-2.5 py-1 rounded-full bg-white hover:bg-emerald-50 text-slate-600 hover:text-emerald-700 border border-slate-200 flex-shrink-0 transition-colors">
+          🍮 吞嚥吃布丁
+        </button>
+        <button onclick="sendQuickMessage('中醫針灸時間與張醫師名片')" class="px-2.5 py-1 rounded-full bg-white hover:bg-emerald-50 text-slate-600 hover:text-emerald-700 border border-slate-200 flex-shrink-0 transition-colors">
+          🪡 針灸排程
+        </button>
+        <button onclick="sendQuickMessage('病房自主運動安全規定')" class="px-2.5 py-1 rounded-full bg-white hover:bg-emerald-50 text-slate-600 hover:text-emerald-700 border border-slate-200 flex-shrink-0 transition-colors">
+          🏃 自主運動
+        </button>
+        <button onclick="sendQuickMessage('尿管跟洗澡如廁')" class="px-2.5 py-1 rounded-full bg-white hover:bg-emerald-50 text-slate-600 hover:text-emerald-700 border border-slate-200 flex-shrink-0 transition-colors">
+          🚿 如廁洗澡
+        </button>
+      </div>
+
+      <!-- Chat Messages Container -->
+      <div id="chatMessages" class="flex-1 p-4 overflow-y-auto space-y-4 bg-slate-50/50 text-sm">
+        <!-- Initial Greeting Message -->
+        <div class="flex items-start space-x-2.5">
+          <div class="w-8 h-8 rounded-xl bg-emerald-600 text-white flex items-center justify-center text-xs font-bold flex-shrink-0 shadow-sm">
+            幫手
+          </div>
+          <div class="chat-bubble-adi max-w-[85%] bg-white p-3.5 rounded-2xl rounded-tl-sm border border-slate-200/80 shadow-sm text-slate-700 leading-relaxed">
+            <p class="font-semibold text-emerald-800 mb-1">您好！我是爸爸照護小幫手 🩺</p>
+            <p>我是曾信士爸爸的專屬照護守則小助手！所有照顧爸爸的作息時程、灌食給藥、吞嚥訓練、針灸與復健安全注意事項，我都能即刻為您解答。</p>
+            <div class="mt-2 text-xs text-slate-500 bg-emerald-50/60 p-2 rounded-xl border border-emerald-100">
+              💡 試試點擊上方標籤，或直接在底下輸入問題，例如：「溶血藥何時吃？」、「週四針灸幾點？」、「吃布丁怎麼餵？」
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Typing Indicator -->
+      <div id="typingIndicator" class="hidden px-5 py-2 flex items-center space-x-2 text-slate-400 text-xs">
+        <div class="w-2 h-2 rounded-full bg-emerald-400 animate-bounce"></div>
+        <div class="w-2 h-2 rounded-full bg-emerald-400 animate-bounce [animation-delay:0.2s]"></div>
+        <div class="w-2 h-2 rounded-full bg-emerald-400 animate-bounce [animation-delay:0.4s]"></div>
+        <span class="pl-1">小幫手正在翻閱照護守則...</span>
+      </div>
+
+      <!-- Chat Input Area -->
+      <div class="p-3 bg-white border-t border-slate-200">
+        <form id="chatForm" onsubmit="handleChatSubmit(event)" class="flex items-center space-x-2">
+          <div class="relative flex-1">
+            <input 
+              type="text" 
+              id="userInput" 
+              placeholder="向小幫手提問（例如：溶血藥、布丁、針灸、時間表...）" 
+              class="w-full pl-4 pr-10 py-2.5 bg-slate-100 hover:bg-slate-100/80 focus:bg-white text-slate-800 placeholder-slate-400 rounded-2xl border border-transparent focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-200 text-sm transition-all"
+              autocomplete="off"
+            />
+            <button 
+              type="button" 
+              onclick="clearInput()" 
+              id="clearInputBtn" 
+              class="hidden absolute right-3 top-2.5 text-slate-400 hover:text-slate-600"
+            >
+              <i class="ph-bold ph-x-circle text-lg"></i>
+            </button>
+          </div>
+          <button 
+            type="submit" 
+            class="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white font-medium rounded-2xl shadow-sm shadow-emerald-200 flex items-center justify-center transition-all disabled:opacity-50"
+          >
+            <i class="ph-bold ph-paper-plane-right text-base"></i>
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- RIGHT COLUMN: Interactive Six Modules & Checklist (7 Cols on LG) -->
+    <section class="lg:col-span-7 flex flex-col space-y-5">
+
+      <!-- Navigation Tabs -->
+      <div class="bg-slate-200/80 p-1.5 rounded-2xl flex items-center space-x-1 text-xs sm:text-sm font-semibold text-slate-600 select-none">
+        <button id="tabBtn1" onclick="switchTab('modules')" class="flex-1 py-2 rounded-xl transition-all flex items-center justify-center space-x-1.5 tab-active">
+          <i class="ph-bold ph-squares-four text-base"></i>
+          <span>六大模組懶人包</span>
+        </button>
+        <button id="tabBtn2" onclick="switchTab('timeline')" class="flex-1 py-2 rounded-xl transition-all flex items-center justify-center space-x-1.5 hover:text-slate-900">
+          <i class="ph-bold ph-clock-countdown text-base"></i>
+          <span>一日時間軸清單</span>
+        </button>
+        <button id="tabBtn3" onclick="switchTab('handover')" class="flex-1 py-2 rounded-xl transition-all flex items-center justify-center space-x-1.5 hover:text-slate-900">
+          <i class="ph-bold ph-check-square-offset text-base"></i>
+          <span>照護打卡 & 交接</span>
+        </button>
+      </div>
+
+      <div id="viewModules" class="space-y-4">
+        
+        <!-- Emergency alert card (Dynamic & Editable Daily Notice) -->
+        <div class="bg-gradient-to-r from-amber-50 to-orange-50 border-l-4 border-amber-500 rounded-2xl p-4 shadow-sm">
+          <div class="flex items-start space-x-3">
+            <div class="p-2 bg-amber-500 text-white rounded-xl shadow-sm">
+              <i class="ph-fill ph-warning-octagon text-xl"></i>
+            </div>
+            <div class="flex-1 text-sm">
+              <div class="flex items-center justify-between">
+                <h3 class="font-bold text-amber-900 text-sm sm:text-base flex items-center space-x-2">
+                  <span id="dailyNoticeTitle">本日重點交接提醒事項</span>
+                  <span class="text-[10px] bg-amber-200 text-amber-900 px-2 py-0.5 rounded-full font-bold">重要交接</span>
+                </h3>
+                <button onclick="toggleNoticeEdit()" class="text-xs text-amber-800 hover:text-amber-950 font-semibold underline flex items-center space-x-1">
+                  <i class="ph-bold ph-pencil-simple"></i>
+                  <span>編輯提醒</span>
+                </button>
+              </div>
+
+              <!-- View mode -->
+              <div id="noticeDisplayArea" class="mt-2 text-amber-800 text-xs sm:text-sm">
+                <ul id="noticeList" class="space-y-1 list-disc list-inside">
+                  <li><strong>中醫針灸：</strong> 原張醫師不在！請拿張醫師留的推薦名片，改抽名片推薦醫師號碼。</li>
+                  <li><strong>語言治療評估：</strong> 上午 09:00 需進行 <strong>PAC 語言能力評估</strong>，若與運動治療衝突自行調配。</li>
+                </ul>
+              </div>
+
+              <!-- Edit mode -->
+              <div id="noticeEditArea" class="hidden mt-3 space-y-2">
+                <input type="text" id="editNoticeTitleInput" class="w-full text-xs p-2 rounded-xl border border-amber-300 focus:outline-none focus:ring-1 focus:ring-amber-500" value="本日重點交接提醒事項" placeholder="提醒標題（例：10/16 (週五) 重點交接）" />
+                <textarea id="editNoticeTextInput" rows="3" class="w-full text-xs p-2 rounded-xl border border-amber-300 focus:outline-none focus:ring-1 focus:ring-amber-500" placeholder="每行一項提醒..."></textarea>
+                <div class="flex justify-end space-x-2">
+                  <button onclick="toggleNoticeEdit()" class="px-3 py-1 text-xs rounded-lg bg-slate-200 text-slate-700 hover:bg-slate-300">取消</button>
+                  <button onclick="saveDailyNotice()" class="px-3 py-1 text-xs rounded-lg bg-amber-600 text-white font-semibold hover:bg-amber-700">儲存提醒</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6 Module Expandable Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+          <!-- Card 1: 每日作息 -->
+          <div class="bg-white rounded-2xl p-4 border border-slate-200/80 shadow-sm hover:shadow-md transition-shadow">
+            <div class="flex items-center space-x-3 mb-2.5">
+              <span class="w-8 h-8 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-base">
+                🕒
+              </span>
+              <div>
+                <h4 class="font-bold text-slate-800 text-sm">一、每日標準作息表</h4>
+                <p class="text-xs text-slate-400">晨間擦澡、6餐灌食、睡前藥</p>
+              </div>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed mb-3">
+              晨間 06:45 灌胃藥，07:00 第1餐。下午 15:00 走廊散步與自主訓練。全日灌 6 餐（末餐 21:30 加蛋白粉）。
+            </p>
+            <button onclick="openDetailModal('schedule')" class="w-full py-1.5 text-xs font-semibold text-blue-700 bg-blue-50 hover:bg-blue-100 rounded-xl transition-colors flex items-center justify-center space-x-1">
+              <span>查看詳細作息表</span>
+              <i class="ph-bold ph-caret-right text-xs"></i>
+            </button>
+          </div>
+
+          <!-- Card 2: 中醫針灸 -->
+          <div class="bg-white rounded-2xl p-4 border border-slate-200/80 shadow-sm hover:shadow-md transition-shadow">
+            <div class="flex items-center space-x-3 mb-2.5">
+              <span class="w-8 h-8 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-base">
+                🪡
+              </span>
+              <div>
+                <h4 class="font-bold text-slate-800 text-sm">二、中醫針灸排程</h4>
+                <p class="text-xs text-slate-400">週一至週三上午 / 週四下午</p>
+              </div>
+            </div>
+            <div class="text-xs text-slate-600 space-y-1 mb-3">
+              <div class="flex justify-between py-0.5 border-b border-slate-100">
+                <span class="text-slate-500">週一 ～ 週三：</span>
+                <span class="font-medium text-slate-800">上午 08:30</span>
+              </div>
+              <div class="flex justify-between py-0.5 border-b border-slate-100">
+                <span class="text-slate-500">週四：</span>
+                <span class="font-medium text-amber-600">下午 13:30 (錯開第3餐)</span>
+              </div>
+              <div class="flex justify-between py-0.5 text-red-600 font-semibold">
+                <span>10/16 (週五)：</span>
+                <span>持張醫師名片改抽推薦醫師</span>
+              </div>
+            </div>
+            <button onclick="openDetailModal('acupuncture')" class="w-full py-1.5 text-xs font-semibold text-purple-700 bg-purple-50 hover:bg-purple-100 rounded-xl transition-colors flex items-center justify-center space-x-1">
+              <span>查看針灸細則</span>
+              <i class="ph-bold ph-caret-right text-xs"></i>
+            </button>
+          </div>
+
+          <!-- Card 3: 鼻胃管與給藥 -->
+          <div class="bg-white rounded-2xl p-4 border border-slate-200/80 shadow-sm hover:shadow-md transition-shadow">
+            <div class="flex items-center space-x-3 mb-2.5">
+              <span class="w-8 h-8 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center font-bold text-base">
+                🍼
+              </span>
+              <div>
+                <h4 class="font-bold text-slate-800 text-sm">三、鼻胃管與給藥鐵律</h4>
+                <p class="text-xs text-slate-400">溶血藥彈性機制、坐姿30分</p>
+              </div>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed mb-3">
+              💊 <strong>溶血藥注意：</strong>第1餐後護理師送來就先吃；若沒送來等復健後第2餐再吃。全天總水分需達 1500~2000cc。
+            </p>
+            <button onclick="openDetailModal('medication')" class="w-full py-1.5 text-xs font-semibold text-rose-700 bg-rose-50 hover:bg-rose-100 rounded-xl transition-colors flex items-center justify-center space-x-1">
+              <span>查看給藥與防逆流SOP</span>
+              <i class="ph-bold ph-caret-right text-xs"></i>
+            </button>
+          </div>
+
+          <!-- Card 4: 吞嚥訓練 -->
+          <div class="bg-white rounded-2xl p-4 border border-slate-200/80 shadow-sm hover:shadow-md transition-shadow">
+            <div class="flex items-center space-x-3 mb-2.5">
+              <span class="w-8 h-8 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center font-bold text-base">
+                🍮
+              </span>
+              <div>
+                <h4 class="font-bold text-slate-800 text-sm">四、由口進食：吞嚥訓練</h4>
+                <p class="text-xs text-slate-400">及早拔除鼻胃管為目標！</p>
+              </div>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed mb-3">
+              每日餐間練1次。可吃布丁/豆腐/蒸蛋。<strong>絕對禁止稀飯與任何液體</strong>。每次半湯匙，務必叮嚀<strong>低頭吞嚥</strong>！
+            </p>
+            <button onclick="openDetailModal('swallowing')" class="w-full py-1.5 text-xs font-semibold text-amber-700 bg-amber-50 hover:bg-amber-100 rounded-xl transition-colors flex items-center justify-center space-x-1">
+              <span>查看餵食5步驟圖解</span>
+              <i class="ph-bold ph-caret-right text-xs"></i>
+            </button>
+          </div>
+
+          <!-- Card 5: 復健與自主運動 -->
+          <div class="bg-white rounded-2xl p-4 border border-slate-200/80 shadow-sm hover:shadow-md transition-shadow">
+            <div class="flex items-center space-x-3 mb-2.5">
+              <span class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-base">
+                🏃
+              </span>
+              <div>
+                <h4 class="font-bold text-slate-800 text-sm">五、復健與病房自主訓練</h4>
+                <p class="text-xs text-slate-400">抬膝與站立平衡（安全死命令）</p>
+              </div>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed mb-3">
+              平日上午 09:00~11:00 醫院復健。自主運動需在<strong>輪椅前壓重物</strong>，且身後務必貼身防摔！週末無復健更要自主練。
+            </p>
+            <button onclick="openDetailModal('exercise')" class="w-full py-1.5 text-xs font-semibold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 rounded-xl transition-colors flex items-center justify-center space-x-1">
+              <span>查看自主動作與防跌規範</span>
+              <i class="ph-bold ph-caret-right text-xs"></i>
+            </button>
+          </div>
+
+          <!-- Card 6: 洗澡清潔與如廁 -->
+          <div class="bg-white rounded-2xl p-4 border border-slate-200/80 shadow-sm hover:shadow-md transition-shadow">
+            <div class="flex items-center space-x-3 mb-2.5">
+              <span class="w-8 h-8 rounded-xl bg-teal-100 text-teal-700 flex items-center justify-center font-bold text-base">
+                🚿
+              </span>
+              <div>
+                <h4 class="font-bold text-slate-800 text-sm">六、如廁清潔與護理</h4>
+                <p class="text-xs text-slate-400">尿管拔除排尿正常、右側防護</p>
+              </div>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed mb-3">
+              尿管已拔，排尿順暢。走廊行走需站<strong>右側防護</strong>。大便後確實擦乾淨並塗藥。上半身擦澡塗乳液，下半身浴室沖洗。
+            </p>
+            <button onclick="openDetailModal('hygiene')" class="w-full py-1.5 text-xs font-semibold text-teal-700 bg-teal-50 hover:bg-teal-100 rounded-xl transition-colors flex items-center justify-center space-x-1">
+              <span>查看清潔護理細節</span>
+              <i class="ph-bold ph-caret-right text-xs"></i>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <div id="viewTimeline" class="hidden bg-white rounded-3xl p-5 border border-slate-200/90 shadow-sm">
+        <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
+          <div>
+            <h3 class="font-bold text-base text-slate-800">曾信士 每日作息全時間軸</h3>
+            <p class="text-xs text-slate-500">掌握關鍵 6 餐灌食與用藥時間窗口</p>
+          </div>
+          <span class="text-xs bg-slate-100 text-slate-600 px-3 py-1 rounded-full font-medium">總液體目標: 1500-2000 cc</span>
+        </div>
+
+        <div class="relative border-l-2 border-emerald-200 ml-4 pl-6 space-y-6 text-sm">
+          
+          <!-- Item 1 -->
+          <div class="relative group">
+            <span class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-emerald-500 border-2 border-white ring-2 ring-emerald-200"></span>
+            <div class="flex items-center space-x-2">
+              <span class="font-bold text-emerald-800 text-xs sm:text-sm">06:45</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-rose-100 text-rose-800">藥物</span>
+            </div>
+            <p class="font-semibold text-slate-800 mt-0.5">灌「餐前胃藥」</p>
+            <p class="text-xs text-slate-500">以少量溫水沖灌，準備第一餐。</p>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="relative">
+            <span class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-emerald-500 border-2 border-white ring-2 ring-emerald-200"></span>
+            <div class="flex items-center space-x-2">
+              <span class="font-bold text-emerald-800 text-xs sm:text-sm">07:00</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-100 text-emerald-800">第 1 餐</span>
+            </div>
+            <p class="font-semibold text-slate-800 mt-0.5">【第 1 餐】 灌食 ＋ 晨間護理</p>
+            <p class="text-xs text-slate-600 mt-1">
+              餐後擦臉、洗頭、塗臉部/皮膚藥膏、上半身擦澡塗乳液。<br>
+              <span class="inline-block mt-1 p-1.5 bg-rose-50 text-rose-700 rounded-lg text-xs font-medium border border-rose-100">
+                💊 <strong>溶血藥注意：</strong>護理師若此時已送來，在去復健前先吃掉；若未送達，等復健完第 2 餐再吃。
+              </span>
+            </p>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="relative">
+            <span class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-teal-500 border-2 border-white ring-2 ring-teal-200"></span>
+            <span class="font-bold text-teal-800 text-xs sm:text-sm">07:30</span>
+            <p class="font-semibold text-slate-800 mt-0.5">帶去廁所如廁 ＋ 洗下半身</p>
+            <p class="text-xs text-slate-500">尿管已拔排尿正常；大便後務必擦乾淨並塗藥。浴室抹沐浴乳沖洗下半身。</p>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="relative">
+            <span class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-slate-400 border-2 border-white ring-2 ring-slate-200"></span>
+            <span class="font-bold text-slate-700 text-xs sm:text-sm">08:10</span>
+            <p class="font-semibold text-slate-800 mt-0.5">休息 / 滑手機</p>
+            <p class="text-xs text-slate-500">抗生素已停，餐後休息滿 30 分鐘即可準備出發。</p>
+          </div>
+
+          <!-- Item 5 -->
+          <div class="relative">
+            <span class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-purple-500 border-2 border-white ring-2 ring-purple-200"></span>
+            <div class="flex items-center space-x-2">
+              <span class="font-bold text-purple-800 text-xs sm:text-sm">08:30</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-purple-100 text-purple-800">中醫</span>
+            </div>
+            <p class="font-semibold text-slate-800 mt-0.5">中醫針灸（週一～週三）</p>
+            <p class="text-xs text-slate-500">⚠️ 週四改至下午 13:30；10/16 (週五) 請拿張醫師名片抽推薦醫師號。</p>
+          </div>
+
+          <!-- Item 6 -->
+          <div class="relative">
+            <span class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-indigo-500 border-2 border-white ring-2 ring-indigo-200"></span>
+            <div class="flex items-center space-x-2">
+              <span class="font-bold text-indigo-800 text-xs sm:text-sm">09:00 - 11:00</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-indigo-100 text-indigo-800">復健</span>
+            </div>
+            <p class="font-semibold text-slate-800 mt-0.5">醫院復健時段（週一～週五）</p>
+            <p class="text-xs text-slate-600 mt-1">
+              物理治療（運動）＋ 語言治療（吞嚥/說話）。<br>
+              <span class="text-amber-700 font-semibold">⚠️ 10/16（五）09:00 有 PAC 語言能力評估！若重疊彈性調配。</span>
+            </p>
+          </div>
+
+          <!-- Item 7 -->
+          <div class="relative">
+            <span class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-emerald-500 border-2 border-white ring-2 ring-emerald-200"></span>
+            <div class="flex items-center space-x-2">
+              <span class="font-bold text-emerald-800 text-xs sm:text-sm">10:30 (或復健結束後半小時)</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-100 text-emerald-800">第 2 餐</span>
+            </div>
+            <p class="font-semibold text-slate-800 mt-0.5">【第 2 餐】 ＋ 溶血藥（若早晨未吃）</p>
+            <p class="text-xs text-slate-500">吃完務必搖高床頭或維持坐姿休息 30 分鐘，方可平躺午休。</p>
+          </div>
+
+          <!-- Item 8 -->
+          <div class="relative">
+            <span class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-emerald-500 border-2 border-white ring-2 ring-emerald-200"></span>
+            <div class="flex items-center space-x-2">
+              <span class="font-bold text-emerald-800 text-xs sm:text-sm">13:30</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-100 text-emerald-800">第 3 餐</span>
+            </div>
+            <p class="font-semibold text-slate-800 mt-0.5">【第 3 餐】 灌食</p>
+            <p class="text-xs text-slate-500">⚠️ 週四因 13:30 有中醫針灸，此餐時間需微調提前或錯開。</p>
+          </div>
+
+          <!-- Item 9 -->
+          <div class="relative">
+            <span class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-amber-500 border-2 border-white ring-2 ring-amber-200"></span>
+            <span class="font-bold text-amber-800 text-xs sm:text-sm">15:00</span>
+            <p class="font-semibold text-slate-800 mt-0.5">病房走廊散步 ＋ 自主訓練 ＋ 吞嚥吃布丁</p>
+            <p class="text-xs text-slate-500">鼓勵下床走走（護右側），餐間練一次布丁吞嚥（低頭吞）。床邊扶輪椅抬膝。</p>
+          </div>
+
+          <!-- Item 10 -->
+          <div class="relative">
+            <span class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-emerald-500 border-2 border-white ring-2 ring-emerald-200"></span>
+            <span class="font-bold text-emerald-800 text-xs sm:text-sm">16:30 / 18:30</span>
+            <p class="font-semibold text-slate-800 mt-0.5">【第 4、5 餐】 灌食</p>
+            <p class="text-xs text-slate-500">每餐間隔約 2.5～3 小時，前後溫水沖管防塞管。</p>
+          </div>
+
+          <!-- Item 11 -->
+          <div class="relative">
+            <span class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-emerald-600 border-2 border-white ring-2 ring-emerald-300"></span>
+            <div class="flex items-center space-x-2">
+              <span class="font-bold text-emerald-900 text-xs sm:text-sm">21:30</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-200 text-emerald-900">最後一餐</span>
+            </div>
+            <p class="font-semibold text-slate-800 mt-0.5">【第 6 餐（末餐）】 加蛋白粉</p>
+            <p class="text-xs text-slate-500">餵完坐姿維持 30 分鐘防胃食道逆流。</p>
+          </div>
+
+          <!-- Item 12 -->
+          <div class="relative">
+            <span class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-slate-700 border-2 border-white ring-2 ring-slate-400"></span>
+            <div class="flex items-center space-x-2">
+              <span class="font-bold text-slate-800 text-xs sm:text-sm">22:30</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-slate-200 text-slate-800">睡前藥</span>
+            </div>
+            <p class="font-semibold text-slate-800 mt-0.5">吃「攝護腺藥」 ➔ 熄燈就寢</p>
+            <p class="text-xs text-slate-500">夜間安眠，床欄兩側確實拉起確保安全。</p>
+          </div>
+
+        </div>
+      </div>
+
+      <div id="viewHandover" class="hidden bg-white rounded-3xl p-5 border border-slate-200/90 shadow-sm space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-slate-100 gap-2">
+          <div>
+            <h3 class="font-bold text-base text-slate-800">今日照護交接檢核表</h3>
+            <p class="text-xs text-slate-500">即時打勾標記，一鍵複製交接摘要發至 LINE</p>
+          </div>
+          <button onclick="copyHandoverSummary()" class="inline-flex items-center justify-center space-x-1.5 px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold shadow-sm transition">
+            <i class="ph-bold ph-copy text-sm"></i>
+            <span>複製交接進度 (LINE)</span>
+          </button>
+        </div>
+
+        <div class="space-y-2.5 text-xs sm:text-sm" id="checklistContainer">
+          <!-- Item 1 -->
+          <label class="flex items-center p-3 rounded-2xl bg-slate-50 hover:bg-slate-100/80 cursor-pointer border border-slate-100 transition">
+            <input type="checkbox" id="chk_stomach" class="w-4 h-4 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500 mr-3">
+            <div class="flex-1">
+              <span class="font-semibold text-slate-800">06:45 晨間餐前胃藥</span>
+              <span class="block text-xs text-slate-400">溫水沖管給藥</span>
+            </div>
+          </label>
+
+          <!-- Item 2 -->
+          <label class="flex items-center p-3 rounded-2xl bg-slate-50 hover:bg-slate-100/80 cursor-pointer border border-slate-100 transition">
+            <input type="checkbox" id="chk_meal1" class="w-4 h-4 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500 mr-3">
+            <div class="flex-1">
+              <span class="font-semibold text-slate-800">07:00 【第 1 餐】 灌食完成</span>
+              <span class="block text-xs text-slate-400">包含洗頭、擦臉、上半身擦澡塗乳液</span>
+            </div>
+          </label>
+
+          <!-- Item 3 -->
+          <label class="flex items-center p-3 rounded-2xl bg-slate-50 hover:bg-slate-100/80 cursor-pointer border border-slate-100 transition">
+            <input type="checkbox" id="chk_blood" class="w-4 h-4 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500 mr-3">
+            <div class="flex-1">
+              <span class="font-semibold text-slate-800">溶血藥確認服下</span>
+              <span class="block text-xs text-slate-400">已確認送藥時程（復健前或復健後第 2 餐）</span>
+            </div>
+          </label>
+
+          <!-- Item 4 -->
+          <label class="flex items-center p-3 rounded-2xl bg-slate-50 hover:bg-slate-100/80 cursor-pointer border border-slate-100 transition">
+            <input type="checkbox" id="chk_toilet" class="w-4 h-4 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500 mr-3">
+            <div class="flex-1">
+              <span class="font-semibold text-slate-800">如廁與下半身清洗</span>
+              <span class="block text-xs text-slate-400">尿尿正常；大便擦淨並塗藥；陪伴站右側</span>
+            </div>
+          </label>
+
+          <!-- Item 5 -->
+          <label class="flex items-center p-3 rounded-2xl bg-slate-50 hover:bg-slate-100/80 cursor-pointer border border-slate-100 transition">
+            <input type="checkbox" id="chk_acu" class="w-4 h-4 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500 mr-3">
+            <div class="flex-1">
+              <span class="font-semibold text-slate-800">中醫針灸（依當日排程）</span>
+              <span class="block text-xs text-slate-400">週一~三 08:30 / 週四 13:30 / 10/16 換名片抽號</span>
+            </div>
+          </label>
+
+          <!-- Item 6 -->
+          <label class="flex items-center p-3 rounded-2xl bg-slate-50 hover:bg-slate-100/80 cursor-pointer border border-slate-100 transition">
+            <input type="checkbox" id="chk_rehab" class="w-4 h-4 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500 mr-3">
+            <div class="flex-1">
+              <span class="font-semibold text-slate-800">09:00-11:00 醫院復健（物理+語言）</span>
+              <span class="block text-xs text-slate-400">週五 09:00 PAC 語言評估；週末改病房自主訓練</span>
+            </div>
+          </label>
+
+          <!-- Item 7 -->
+          <label class="flex items-center p-3 rounded-2xl bg-slate-50 hover:bg-slate-100/80 cursor-pointer border border-slate-100 transition">
+            <input type="checkbox" id="chk_meal2" class="w-4 h-4 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500 mr-3">
+            <div class="flex-1">
+              <span class="font-semibold text-slate-800">10:30 【第 2 餐】 灌食完成</span>
+              <span class="block text-xs text-slate-400">吃完坐姿 30 分鐘再躺下</span>
+            </div>
+          </label>
+
+          <!-- Item 8 -->
+          <label class="flex items-center p-3 rounded-2xl bg-slate-50 hover:bg-slate-100/80 cursor-pointer border border-slate-100 transition">
+            <input type="checkbox" id="chk_pudding" class="w-4 h-4 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500 mr-3">
+            <div class="flex-1">
+              <span class="font-semibold text-slate-800">餐間布丁吞嚥自主訓練 1 次</span>
+              <span class="block text-xs text-slate-400">半湯匙、低頭吞、檢查無殘留</span>
+            </div>
+          </label>
+
+          <!-- Item 9 -->
+          <label class="flex items-center p-3 rounded-2xl bg-slate-50 hover:bg-slate-100/80 cursor-pointer border border-slate-100 transition">
+            <input type="checkbox" id="chk_exercise" class="w-4 h-4 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500 mr-3">
+            <div class="flex-1">
+              <span class="font-semibold text-slate-800">病房自主運動（抬膝+站立平衡）</span>
+              <span class="block text-xs text-slate-400">輪椅前壓重物，後方有人貼身守護</span>
+            </div>
+          </label>
+
+          <!-- Item 10 -->
+          <label class="flex items-center p-3 rounded-2xl bg-slate-50 hover:bg-slate-100/80 cursor-pointer border border-slate-100 transition">
+            <input type="checkbox" id="chk_meals_afternoon" class="w-4 h-4 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500 mr-3">
+            <div class="flex-1">
+              <span class="font-semibold text-slate-800">午後灌食 【第 3、4、5 餐】</span>
+              <span class="block text-xs text-slate-400">間隔 2.5~3 小時，總液體量監測</span>
+            </div>
+          </label>
+
+          <!-- Item 11 -->
+          <label class="flex items-center p-3 rounded-2xl bg-slate-50 hover:bg-slate-100/80 cursor-pointer border border-slate-100 transition">
+            <input type="checkbox" id="chk_meal6" class="w-4 h-4 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500 mr-3">
+            <div class="flex-1">
+              <span class="font-semibold text-slate-800">21:30 【第 6 餐（末餐）】 ＋ 蛋白粉</span>
+              <span class="block text-xs text-slate-400">餵完坐姿 30 分鐘</span>
+            </div>
+          </label>
+
+          <!-- Item 12 -->
+          <label class="flex items-center p-3 rounded-2xl bg-slate-50 hover:bg-slate-100/80 cursor-pointer border border-slate-100 transition">
+            <input type="checkbox" id="chk_night" class="w-4 h-4 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500 mr-3">
+            <div class="flex-1">
+              <span class="font-semibold text-slate-800">22:30 睡前攝護腺藥 ＆ 熄燈就寢</span>
+              <span class="block text-xs text-slate-400">床欄升起固定</span>
+            </div>
+          </label>
+        </div>
+
+        <div class="p-3 bg-emerald-50 rounded-2xl border border-emerald-200 text-xs text-emerald-800 flex items-center justify-between">
+          <span>💡 打勾紀錄會保存在本機瀏覽器，方便日夜班換手對照！</span>
+          <button onclick="resetChecklist()" class="text-emerald-700 hover:text-emerald-900 underline font-semibold">重置全部</button>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  
+  <!-- Generic Detail Modal -->
+  <div id="detailModal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 transform transition-all relative">
+      <button onclick="closeModal('detailModal')" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600 p-1 rounded-full hover:bg-slate-100">
+        <i class="ph-bold ph-x text-xl"></i>
+      </button>
+
+      <div id="modalContent">
+        <!-- Content will be injected dynamically by openDetailModal() -->
+      </div>
+
+      <div class="mt-6 pt-4 border-t border-slate-100 flex justify-end">
+        <button onclick="closeModal('detailModal')" class="px-5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl text-sm transition">
+          關閉
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10/16 Urgent Notice Modal -->
+  <div id="urgentNoticeModal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border-2 border-amber-300 relative">
+      <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-2xl mb-3 shadow-inner">
+        ⚠️
+      </div>
+      <h3 class="text-lg font-bold text-slate-900" id="modalNoticeTitle">本日重點交接備忘錄</h3>
+      <p class="text-xs text-slate-500 mb-4">交接給下一位照顧者前，請確認以下關鍵排程已交代完畢：</p>
+      
+      <div class="space-y-3 text-sm text-slate-700" id="modalNoticeContainer">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <div class="mt-5 flex justify-end">
+        <button onclick="toggleModal('urgentNoticeModal')" class="w-full py-2.5 bg-amber-600 hover:bg-amber-700 text-white font-bold rounded-xl text-sm transition">
+          我知道了，全力照護！
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification Toast -->
+  <div id="toastMessage" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 bg-slate-900/90 text-white px-4 py-3 rounded-2xl shadow-xl flex items-center space-x-2 text-sm pointer-events-none">
+    <i class="ph-bold ph-check-circle text-emerald-400 text-lg"></i>
+    <span id="toastText">訊息已更新</span>
+  </div>
+
+  <script>
+    // Knowledge Base Data extracted from Version 1 & Version 2
+    const CARE_KNOWLEDGE = {
+      schedule: {
+        title: "🕒 一、每日標準作息時間表",
+        badge: "生活作息",
+        color: "blue",
+        html: `
+          <div class="space-y-3 text-xs sm:text-sm text-slate-700 leading-relaxed">
+            <p><strong>• 06:45｜</strong>灌「餐前胃藥」</p>
+            <p><strong>• 07:00｜【第 1 餐】</strong> 餐後擦臉、洗頭、塗臉部/皮膚藥膏、上半身擦澡塗乳液。<br>
+               <span class="text-rose-600 font-semibold">💊 溶血藥注意：</span>若護理師在第 1 餐後就送來溶血藥，去復健前先吃；若還沒送來，就等復健回來吃第 2 餐時再吃。</p>
+            <p><strong>• 07:30｜</strong>帶去廁所（尿管已拔，排尿正常！大便後屁股務必擦乾淨並上藥；下半身可在浴室抹沐浴乳沖洗）。</p>
+            <p><strong>• 08:10｜</strong>休息／滑手機（抗生素已停，第 1 餐後休息滿半小時即可準備行程）。</p>
+            <p><strong>• 08:30｜</strong>【中醫針灸（週一～週三）】（週四改至 13:30）。</p>
+            <p><strong>• 09:00 - 11:00｜【醫院復健時段（週一～週五）】</strong> 物理治療（運動）＋語言治療（吞嚥/說話）。<br>
+               <span class="text-amber-700">⚠️ 10/16（五）09:00 PAC 語言評估，若時間重疊自行彈性調配先後。</span></p>
+            <p><strong>• 10:30 (或復健後30分)｜【第 2 餐】</strong> ＋ 餐後溶血藥（若早晨未吃）。吃完務必坐姿 30 分鐘再躺下午休。</p>
+            <p><strong>• 13:30｜【第 3 餐】</strong>（⚠️ 週四 13:30 有針灸需微調錯開）</p>
+            <p><strong>• 15:00｜</strong>病房走廊散步（下床走走，搭配病房自主訓練，餐間練一次吞嚥吃布丁）。</p>
+            <p><strong>• 16:30 / 18:30｜【第 4、5 餐】</strong>（間隔約 2.5～3 小時）</p>
+            <p><strong>• 21:30｜【第 6 餐（最後一餐）】</strong>（加蛋白粉，餵完維持坐姿半小時）</p>
+            <p><strong>• 22:30｜</strong>睡前吃「攝護腺藥」 ➔ 熄燈就寢。</p>
+          </div>
+        `
+      },
+      acupuncture: {
+        title: "🪡 二、中醫針灸排程與注意事項",
+        badge: "中醫針灸",
+        color: "purple",
+        html: `
+          <div class="space-y-3 text-xs sm:text-sm text-slate-700 leading-relaxed">
+            <div class="p-3 bg-purple-50 rounded-xl border border-purple-200">
+              <strong class="text-purple-900 block mb-1">📅 固定排程時間：</strong>
+              <ul class="list-disc list-inside space-y-1">
+                <li><strong>週一 ～ 週三：</strong> 上午 08:30</li>
+                <li><strong>週四：</strong> 下午 13:30（第 3 餐灌食需錯開）</li>
+                <li><strong>週五 ～ 週日：</strong> 無固定針灸（除 10/16 週五需代抽一次）</li>
+              </ul>
+            </div>
+            <div class="p-3 bg-amber-50 rounded-xl border border-amber-200">
+              <strong class="text-amber-900 block mb-1">⚠️ 10/16（週五）特別注意：</strong>
+              <p>原本的張醫師不在！請拿張醫師給的推薦名片，改抽名片上推薦醫師的號碼牌！</p>
+            </div>
+          </div>
+        `
+      },
+      medication: {
+        title: "🍼 三、鼻胃管灌食與給藥鐵律",
+        badge: "用藥與防逆流",
+        color: "rose",
+        html: `
+          <div class="space-y-3 text-xs sm:text-sm text-slate-700 leading-relaxed">
+            <p><strong>關鍵藥物時機：</strong></p>
+            <ul class="list-disc list-inside space-y-1 pl-1">
+              <li><strong>06:45：</strong> 餐前胃藥（溫水沖管）。</li>
+              <li><strong>溶血藥（彈性）：</strong> 護理師第 1 餐後送來就在復健前吃；若未送達，等復健回來吃第 2 餐時再吃。</li>
+              <li><strong>睡前（約 22:00-22:30）：</strong> 攝護腺藥。</li>
+            </ul>
+            <div class="p-2.5 bg-rose-50 text-rose-800 rounded-xl border border-rose-200">
+              <strong>⛔ 復健前後禁食：</strong> 復健前只吃 07:00 第 1 餐。復健前 30 分鐘、復健後 30 分鐘內絕對不要灌食，防止劇烈運動造成嘔吐逆流。
+            </div>
+            <div class="p-2.5 bg-blue-50 text-blue-800 rounded-xl border border-blue-200">
+              <strong>💺 防逆流坐姿：</strong> 每一餐灌完、吃完藥，都必須搖高床頭或坐姿維持至少 <strong>30 分鐘</strong> 才能平躺！
+            </div>
+            <p><strong>💧 每日水分：</strong> 全天 6 罐補體素 ＋ 每餐前後溫水沖管，總液體量需達 <strong>1500～2000 cc</strong>。</p>
+          </div>
+        `
+      },
+      swallowing: {
+        title: "🍮 四、由口進食：吞嚥訓練 SOP",
+        badge: "目標：早日拔除鼻胃管",
+        color: "amber",
+        html: `
+          <div class="space-y-3 text-xs sm:text-sm text-slate-700 leading-relaxed">
+            <div class="grid grid-cols-2 gap-2 text-xs">
+              <div class="p-2 bg-emerald-50 rounded-xl border border-emerald-200">
+                <span class="font-bold text-emerald-800 block">✅ 可吃軟固體</span>
+                統一布丁、嫩豆腐、豆花（必須完全濾掉糖水）、蒸蛋。
+              </div>
+              <div class="p-2 bg-rose-50 rounded-xl border border-rose-200">
+                <span class="font-bold text-rose-800 block">❌ 絕對禁止（極易嗆傷）</span>
+                稀飯、帶湯水的食物、任何液體。
+              </div>
+            </div>
+            <p><strong>🥣 工具：</strong> 專用大支一點的湯匙（禁止用買布丁附的小塑膠匙）。</p>
+            <div class="bg-amber-50/70 p-3 rounded-xl border border-amber-200">
+              <strong class="text-amber-900 block mb-1">📋 餵食 5 步驟：</strong>
+              <ol class="list-decimal list-inside space-y-1 text-slate-700">
+                <li><strong>聽聲音：</strong> 吃之前先跟爸對話，確認無痰音、口水音。</li>
+                <li><strong>看口腔：</strong> 請爸張嘴觀察口中情況，請他先試著吞一下口水。</li>
+                <li><strong>半湯匙：</strong> 每次取 <strong>半湯匙</strong> 食物送進嘴裡。</li>
+                <li><strong>低頭吞（最關鍵！）：</strong> 餵食者站著較高會害爸抬頭，務必叮嚀爸「低頭吞嚥」以防嗆傷。</li>
+                <li><strong>查殘留：</strong> 每吞完一口請爸張嘴檢查，確定吞乾淨再給下一口。</li>
+              </ol>
+            </div>
+          </div>
+        `
+      },
+      exercise: {
+        title: "🏃 五、醫院復健與病房自主運動",
+        badge: "復健安全死命令",
+        color: "emerald",
+        html: `
+          <div class="space-y-3 text-xs sm:text-sm text-slate-700 leading-relaxed">
+            <p><strong>時機分配：</strong></p>
+            <ul class="list-disc list-inside space-y-1">
+              <li><strong>平日（週一～週五）：</strong> 09:00-11:00 醫院復健（物理+語言），自主運動排在下午或晚上做。</li>
+              <li><strong>週末（週六、週日）：</strong> 醫院無復健課，請務必在病房自主訓練（早晚皆可分次做）！</li>
+            </ul>
+            <div class="p-3 bg-red-50 text-red-900 rounded-xl border-2 border-red-200">
+              <strong>⚠️ 安全死命令（動作一：扶輪椅抬膝蓋）：</strong><br>
+              一次 20～30 下，做 2 輪。<br>
+              輪椅前面<strong>一定要有重物壓著避免翻車</strong>，且爸爸後面<strong>一定要有人貼身護著</strong>！
+            </div>
+            <div class="p-3 bg-slate-50 text-slate-800 rounded-xl border border-slate-200">
+              <strong>動作二（站立平衡訓練）：</strong><br>
+              站著雙手自然垂下約 10～15 分鐘。可搭配手部動作：雙手向前握拳伸直、抬起到頭上、或用打棒球姿勢左右搖擺 10～15 下。
+            </div>
+          </div>
+        `
+      },
+      hygiene: {
+        title: "🚿 六、洗澡、如廁與清潔護理",
+        badge: "排尿正常",
+        color: "teal",
+        html: `
+          <div class="space-y-3 text-xs sm:text-sm text-slate-700 leading-relaxed">
+            <p><strong>🚽 排尿狀態：</strong> 尿管已於 10/14 移除，目前自己尿尿都正常！（注意陪伴起身去廁所時，人要站在<strong>爸的右側</strong>貼身護著防跌倒）。</p>
+            <p><strong>🧻 大便清潔：</strong> 上完廁所務必把屁股擦乾淨並塗藥膏。</p>
+            <p><strong>🛁 洗澡方式：</strong></p>
+            <ul class="list-disc list-inside space-y-1 pl-1">
+              <li><strong>上半身：</strong> 第 1 餐後擦臉、洗頭、擦澡、塗乳液與上臉部/皮膚藥。</li>
+              <li><strong>下半身：</strong> 可直接在浴室抹沐浴乳後沖洗乾淨。</li>
+            </ul>
+          </div>
+        `
+      }
+    };
+
+    // Chatbot Answer Matching Logic
+    function getBotResponse(userText) {
+      const q = userText.toLowerCase().trim();
+
+      // 1. 作息 / 時間表
+      if (q.includes('作息') || q.includes('時間表') || q.includes('幾點') || q.includes('行程') || q.includes('時間')) {
+        return `🩺 <strong>爸爸的一日作息時間表：</strong><br>
+• <strong>06:45</strong> 灌餐前胃藥<br>
+• <strong>07:00</strong> 【第1餐】＋洗漱擦澡塗藥（⚠️若溶血藥已送來，去復健前先吃）<br>
+• <strong>07:30</strong> 廁所＋洗下半身（尿管已拔，排尿正常）<br>
+• <strong>08:30</strong> 中醫針灸（週一～週三）<br>
+• <strong>09:00-11:00</strong> 醫院復健（運動＋語言）<br>
+• <strong>10:30</strong> 【第2餐】＋溶血藥（若早晨沒吃。吃完坐30分再睡）<br>
+• <strong>13:30</strong> 【第3餐】（⚠️週四13:30有針灸需微調）<br>
+• <strong>15:00</strong> 下床走走＋床邊自主運動＋練吃布丁<br>
+• <strong>16:30 / 18:30</strong> 依序餵第4、5餐<br>
+• <strong>21:30</strong> 【第6餐（末餐）】加蛋白粉，坐姿30分鐘<br>
+• <strong>22:30</strong> 睡前吃「攝護腺藥」➔ 熄燈睡覺`;
+      }
+
+      // 2. 藥物 / 溶血藥 / 胃藥 / 攝護腺
+      if (q.includes('藥') || q.includes('溶血') || q.includes('胃藥') || q.includes('攝護腺') || q.includes('灌食') || q.includes('水') || q.includes('蛋白粉')) {
+        return `🩺 <strong>給藥與灌食重點：</strong><br>
+1. <strong>餐前胃藥：</strong> 06:45（第1餐前沖灌）。<br>
+2. <strong>溶血藥（彈性安排）：</strong> 若護理師在第1餐後送來，就在復健前先吃；若還沒送來，就等復健完第2餐再吃！<br>
+3. <strong>攝護腺藥：</strong> 睡前（22:30）吃。<br>
+4. <strong>⛔ 禁食鐵律：</strong> 復健前後30分鐘內不可餵食，預防嘔吐嗆咳！<br>
+5. <strong>💺 坐姿防逆流：</strong> 每一餐灌完或吃完藥，務必維持坐姿30分鐘再躺下。<br>
+6. <strong>全日水分：</strong> 6罐補體素＋餐前後溫水沖管，總水量需達 1500~2000 cc。`;
+      }
+
+      // 3. 針灸 / 中醫 / 張醫師 / 10/16
+      if (q.includes('針灸') || q.includes('中醫') || q.includes('張醫師') || q.includes('名片') || q.includes('10/16') || q.includes('十月十六')) {
+        return `🩺 <strong>中醫針灸時間表與注意事項：</strong><br>
+• <strong>週一 ～ 週三：</strong> 上午 08:30<br>
+• <strong>週四：</strong> 下午 13:30（與第3餐錯開）<br>
+• <strong>週五 ～ 週日：</strong> 平常無固定針灸。<br>
+<span class="text-rose-600 font-bold">⚠️ 特別注意：</span> 若遇原本張醫師休診不在，請拿張醫師留的<strong>推薦名片</strong>，改抽名片上推薦醫師的號碼牌！`;
+      }
+
+      // 4. 布丁 / 吞嚥 / 吃東西 / 豆腐 / 豆花
+      if (q.includes('布丁') || q.includes('吞嚥') || q.includes('吃') || q.includes('食物') || q.includes('嗆') || q.includes('稀飯')) {
+        return `🩺 <strong>吞嚥訓練 SOP（每天餐間練1次，早日拔鼻胃管）：</strong><br>
+• <strong>✅ 可吃軟固體：</strong> 統一布丁、嫩豆腐、豆花（必須把糖水全濾掉）、蒸蛋。<br>
+• <strong>❌ 絕對禁止：</strong> 稀飯、任何帶湯水食物（極易嗆傷吸入性肺炎）！<br>
+• <strong>🥣 工具：</strong> 大支專用湯匙（嚴禁小塑膠匙）。<br>
+• <strong>📋 餵食5步驟：</strong><br>
+1. <strong>聽聲音：</strong> 吃前先對話，確認無痰音/口水音。<br>
+2. <strong>看口腔：</strong> 張嘴檢查，請爸先吞一下口水。<br>
+3. <strong>半湯匙：</strong> 每口只餵半湯匙。<br>
+4. <strong>低頭吞（最關鍵！）：</strong> 務必提醒爸「低頭吞嚥」防嗆傷，站著餵容易害爸抬頭！<br>
+5. <strong>查殘留：</strong> 吞完張嘴確認吞乾淨，才餵下一口。`;
+      }
+
+      // 5. 復健 / 運動 / 週末 / 抬膝 / 翻車
+      if (q.includes('復健') || q.includes('運動') || q.includes('抬膝') || q.includes('輪椅') || q.includes('平衡') || q.includes('週末')) {
+        return `🩺 <strong>醫院復健與病房自主訓練安全指南：</strong><br>
+• <strong>平日醫院復健（週一～五 09:00-11:00）：</strong> 物理治療＋語言治療同時進行（若遇評估時間重疊請彈性調配）。<br>
+• <strong>床邊自主運動時機：</strong> 平日有去復健排在下午或晚上做；<strong>⚠️週末沒有復健課，請務必在病房自主訓練！</strong><br>
+• <strong>動作1【扶輪椅抬膝】：</strong> 20-30下 × 2輪。<br>
+  <span class="text-rose-600 font-bold">🚨 安全死命令：</span> 輪椅前方必須壓重物防翻車，爸身後必須有人貼身護著！<br>
+• <strong>動作2【站立平衡】：</strong> 站 10-15 分鐘，搭配雙手前伸握拳、舉過頭、打棒球左右搖擺10-15下。`;
+      }
+
+      // 6. 尿尿 / 廁所 / 洗澡 / 擦澡 / 屁股 / 尿管
+      if (q.includes('尿') || q.includes('廁所') || q.includes('洗澡') || q.includes('大便') || q.includes('擦澡') || q.includes('屁股') || q.includes('右側')) {
+        return `🩺 <strong>如廁與清潔護理指南：</strong><br>
+• <strong>排尿：</strong> 尿管已於 10/14 順利拔除，目前尿尿都正常！（陪伴起身去廁所時，人請站在爸的<strong>右側貼身護著</strong>防跌倒）。<br>
+• <strong>大便：</strong> 上完務必把屁股徹底擦乾淨並塗抹藥膏。<br>
+• <strong>洗澡：</strong> 早飯後上半身擦臉、洗頭、擦澡、塗乳液上藥；下半身直接進浴室抹沐浴乳沖洗。睡前記得吃攝護腺藥。`;
+      }
+
+      // 7. 交接 / 哥哥 / 評估 / pac
+      if (q.includes('交接') || q.includes('哥哥') || q.includes('pac') || q.includes('評估')) {
+        return `🩺 <strong>交接重點叮嚀：</strong><br>
+交接前請確認：<br>
+1. 09:00 PAC 語言能力評估（若遇排程重疊彈性調配）。<br>
+2. 中醫針灸若原醫師休診，拿張醫師名片抽推薦醫師號碼。<br>
+3. 溶血藥確認是否已送達與服用時段。<br>
+4. 今日灌食次數與補水總量是否達 1500~2000cc。`;
+      }
+
+      // Fallback Answer
+      return `🩺 我是爸爸照護小幫手！您可以試著換個關鍵字問我，例如：<br>
+• <strong>作息</strong>（時間表、幾點灌食）<br>
+• <strong>吃藥</strong>（溶血藥、胃藥、攝護腺藥）<br>
+• <strong>針灸</strong>（張醫師名片、週四下午時間）<br>
+• <strong>布丁</strong>（吞嚥SOP、低頭吞、禁稀飯）<br>
+• <strong>復健</strong>（輪椅壓重物、週末自主運動）<br>
+• <strong>如廁</strong>（尿管已拔、右側防護、擦澡）`;
+    }
+
+    function appendUserMessage(text) {
+      const chatMessages = document.getElementById('chatMessages');
+      const wrapper = document.createElement('div');
+      wrapper.className = "flex items-start justify-end space-x-2";
+      wrapper.innerHTML = `
+        <div class="chat-bubble-user max-w-[85%] bg-emerald-600 text-white p-3.5 rounded-2xl rounded-tr-sm shadow-sm text-sm leading-relaxed">
+          ${escapeHtml(text)}
+        </div>
+        <div class="w-8 h-8 rounded-xl bg-slate-200 text-slate-700 flex items-center justify-center text-xs font-bold flex-shrink-0">
+          我
+        </div>
+      `;
+      chatMessages.appendChild(wrapper);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function appendBotMessage(htmlText) {
+      const chatMessages = document.getElementById('chatMessages');
+      const wrapper = document.createElement('div');
+      wrapper.className = "flex items-start space-x-2.5";
+      wrapper.innerHTML = `
+        <div class="w-8 h-8 rounded-xl bg-emerald-600 text-white flex items-center justify-center text-xs font-bold flex-shrink-0 shadow-sm">
+          幫手
+        </div>
+        <div class="chat-bubble-adi max-w-[85%] bg-white p-3.5 rounded-2xl rounded-tl-sm border border-slate-200/80 shadow-sm text-slate-700 leading-relaxed text-sm">
+          ${htmlText}
+        </div>
+      `;
+      chatMessages.appendChild(wrapper);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function handleChatSubmit(e) {
+      e.preventDefault();
+      const input = document.getElementById('userInput');
+      const text = input.value.trim();
+      if (!text) return;
+
+      appendUserMessage(text);
+      input.value = '';
+      toggleClearBtn();
+
+      // Show typing indicator
+      const typing = document.getElementById('typingIndicator');
+      typing.classList.remove('hidden');
+      const chatMessages = document.getElementById('chatMessages');
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+
+      setTimeout(() => {
+        typing.classList.add('hidden');
+        const reply = getBotResponse(text);
+        appendBotMessage(reply);
+      }, 350);
+    }
+
+    function sendQuickMessage(query) {
+      const input = document.getElementById('userInput');
+      input.value = query;
+      document.getElementById('chatForm').dispatchEvent(new Event('submit', { cancelable: true }));
+    }
+
+    function clearChatHistory() {
+      const chatMessages = document.getElementById('chatMessages');
+      chatMessages.innerHTML = `
+        <div class="flex items-start space-x-2.5">
+          <div class="w-8 h-8 rounded-xl bg-emerald-600 text-white flex items-center justify-center text-xs font-bold flex-shrink-0 shadow-sm">
+            幫手
+          </div>
+          <div class="chat-bubble-adi max-w-[85%] bg-white p-3.5 rounded-2xl rounded-tl-sm border border-slate-200/80 shadow-sm text-slate-700 leading-relaxed">
+            <p class="font-semibold text-emerald-800 mb-1">對話已重置！我是爸爸照護小幫手 🩺</p>
+            <p>隨時為您查詢曾信士爸爸的作息、灌食、吞嚥布丁、溶血藥與運動注意事項。</p>
+          </div>
+        </div>
+      `;
+      showToast("對話紀錄已清空");
+    }
+
+    function clearInput() {
+      const input = document.getElementById('userInput');
+      input.value = '';
+      toggleClearBtn();
+      input.focus();
+    }
+
+    function toggleClearBtn() {
+      const input = document.getElementById('userInput');
+      const btn = document.getElementById('clearInputBtn');
+      if (input.value.length > 0) {
+        btn.classList.remove('hidden');
+      } else {
+        btn.classList.add('hidden');
+      }
+    }
+
+    document.getElementById('userInput').addEventListener('input', toggleClearBtn);
+
+    // Escape helper
+    function escapeHtml(string) {
+      const entityMap = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+      };
+      return String(string).replace(/[&<>"']/g, function (s) {
+        return entityMap[s];
+      });
+    }
+
+    // Daily Notice LocalStorage & Dynamic Management
+    const NOTICE_STORAGE_KEY = 'zeng_daily_notice_data';
+    const DEFAULT_NOTICE = {
+      title: "10/16 (週五) 重點交接提醒事項",
+      items: [
+        "中醫針灸：原張醫師不在！請拿張醫師留的推薦名片，改抽名片推薦醫師號碼。",
+        "語言治療評估：上午 09:00 需進行 PAC 語言能力評估，若與運動治療衝突自行調配。"
+      ]
+    };
+
+    function loadDailyNotice() {
+      const raw = localStorage.getItem(NOTICE_STORAGE_KEY);
+      let data = DEFAULT_NOTICE;
+      if (raw) {
+        try {
+          data = JSON.parse(raw);
+        } catch (e) {
+          data = DEFAULT_NOTICE;
+        }
+      }
+
+      // Update main banner
+      document.getElementById('dailyNoticeTitle').innerText = data.title;
+      const listEl = document.getElementById('noticeList');
+      listEl.innerHTML = data.items.map(it => `<li>${escapeHtml(it)}</li>`).join('');
+
+      // Update modal
+      document.getElementById('modalNoticeTitle').innerText = data.title;
+      const modalContainer = document.getElementById('modalNoticeContainer');
+      modalContainer.innerHTML = data.items.map((it, idx) => `
+        <div class="p-3 bg-amber-50 rounded-2xl border border-amber-200">
+          <p class="font-bold text-amber-900 mb-0.5">提醒 ${idx + 1}：</p>
+          <p class="text-xs text-amber-800 leading-relaxed">${escapeHtml(it)}</p>
+        </div>
+      `).join('');
+    }
+
+    function toggleNoticeEdit() {
+      const displayArea = document.getElementById('noticeDisplayArea');
+      const editArea = document.getElementById('noticeEditArea');
+      const isEditing = !editArea.classList.contains('hidden');
+
+      if (isEditing) {
+        editArea.classList.add('hidden');
+        displayArea.classList.remove('hidden');
+      } else {
+        const title = document.getElementById('dailyNoticeTitle').innerText;
+        const items = Array.from(document.querySelectorAll('#noticeList li')).map(li => li.innerText);
+        document.getElementById('editNoticeTitleInput').value = title;
+        document.getElementById('editNoticeTextInput').value = items.join('\n');
+        displayArea.classList.add('hidden');
+        editArea.classList.remove('hidden');
+      }
+    }
+
+    function saveDailyNotice() {
+      const title = document.getElementById('editNoticeTitleInput').value.trim() || '本日重點交接提醒事項';
+      const text = document.getElementById('editNoticeTextInput').value.trim();
+      const items = text.split('\n').map(s => s.trim()).filter(Boolean);
+
+      const noticeData = {
+        title: title,
+        items: items.length > 0 ? items : ["今日常規照護，請落實各時段灌食與用藥規範。"]
+      };
+
+      localStorage.setItem(NOTICE_STORAGE_KEY, JSON.stringify(noticeData));
+      loadDailyNotice();
+      toggleNoticeEdit();
+      showToast("本日交接提醒已更新！");
+    }
+
+    function switchTab(tabId) {
+      const tabs = ['modules', 'timeline', 'handover'];
+      tabs.forEach(t => {
+        const btn = document.getElementById('tabBtn' + (t === 'modules' ? '1' : (t === 'timeline' ? '2' : '3')));
+        const view = document.getElementById('view' + t.charAt(0).toUpperCase() + t.slice(1));
+        if (t === tabId) {
+          btn.classList.add('tab-active');
+          btn.classList.remove('hover:text-slate-900');
+          view.classList.remove('hidden');
+        } else {
+          btn.classList.remove('tab-active');
+          btn.classList.add('hover:text-slate-900');
+          view.classList.add('hidden');
+        }
+      });
+    }
+
+    function openDetailModal(key) {
+      const data = CARE_KNOWLEDGE[key];
+      if (!data) return;
+
+      const modalContent = document.getElementById('modalContent');
+      modalContent.innerHTML = `
+        <div class="flex items-center space-x-2.5 mb-3">
+          <span class="text-xs px-2.5 py-1 bg-emerald-100 text-emerald-800 font-bold rounded-full">${data.badge}</span>
+        </div>
+        <h3 class="text-lg font-bold text-slate-800 mb-3">${data.title}</h3>
+        ${data.html}
+      `;
+
+      document.getElementById('detailModal').classList.remove('hidden');
+    }
+
+    function closeModal(modalId) {
+      document.getElementById(modalId).classList.add('hidden');
+    }
+
+    function toggleModal(modalId) {
+      const modal = document.getElementById(modalId);
+      modal.classList.toggle('hidden');
+    }
+
+    const CHECKLIST_STORAGE_KEY = 'zeng_care_checklist_state';
+
+    function initChecklist() {
+      const saved = localStorage.getItem(CHECKLIST_STORAGE_KEY);
+      if (saved) {
+        try {
+          const state = JSON.parse(saved);
+          Object.keys(state).forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.checked = state[id];
+          });
+        } catch (e) {
+          console.error("Failed to parse checklist state", e);
+        }
+      }
+
+      // Add change listeners
+      const checkboxes = document.querySelectorAll('#checklistContainer input[type="checkbox"]');
+      checkboxes.forEach(cb => {
+        cb.addEventListener('change', saveChecklist);
+      });
+    }
+
+    function saveChecklist() {
+      const checkboxes = document.querySelectorAll('#checklistContainer input[type="checkbox"]');
+      const state = {};
+      checkboxes.forEach(cb => {
+        state[cb.id] = cb.checked;
+      });
+      localStorage.setItem(CHECKLIST_STORAGE_KEY, JSON.stringify(state));
+    }
+
+    function resetChecklist() {
+      const checkboxes = document.querySelectorAll('#checklistContainer input[type="checkbox"]');
+      checkboxes.forEach(cb => cb.checked = false);
+      localStorage.removeItem(CHECKLIST_STORAGE_KEY);
+      showToast("檢核清單已重置");
+    }
+
+    function copyHandoverSummary() {
+      const dateStr = new Date().toLocaleDateString('zh-TW', { month: 'numeric', day: 'numeric', weekday: 'short' });
+      const items = [
+        { id: 'chk_stomach', title: '06:45 餐前胃藥' },
+        { id: 'chk_meal1', title: '07:00 第1餐＋洗漱擦澡' },
+        { id: 'chk_blood', title: '溶血藥服用' },
+        { id: 'chk_toilet', title: '如廁洗下半身（尿尿正常/屁股擦藥）' },
+        { id: 'chk_acu', title: '中醫針灸' },
+        { id: 'chk_rehab', title: '09:00-11:00 醫院復健（物理+語言）' },
+        { id: 'chk_meal2', title: '10:30 第2餐＋坐姿30分' },
+        { id: 'chk_pudding', title: '餐間布丁吞嚥練習' },
+        { id: 'chk_exercise', title: '病房自主運動（抬膝+平衡）' },
+        { id: 'chk_meals_afternoon', title: '午後第3、4、5餐灌食' },
+        { id: 'chk_meal6', title: '21:30 第6餐＋蛋白粉' },
+        { id: 'chk_night', title: '22:30 睡前攝護腺藥＆就寢' }
+      ];
+
+      let text = `📋【曾信士 照護交接進度 — ${dateStr}】\n\n`;
+      let completedCount = 0;
+
+      items.forEach(item => {
+        const cb = document.getElementById(item.id);
+        const isDone = cb && cb.checked;
+        if (isDone) completedCount++;
+        text += `${isDone ? '✅' : '⬜'} ${item.title}\n`;
+      });
+
+      // Get current active notices for handover
+      const currentNoticeTitle = document.getElementById('dailyNoticeTitle').innerText;
+      const noticeItems = Array.from(document.querySelectorAll('#noticeList li')).map(li => li.innerText);
+
+      text += `\n📌 完成度：${completedCount}/${items.length}\n`;
+      if (noticeItems.length > 0) {
+        text += `⚠️ 本日重點：\n${noticeItems.map(it => `• ${it}`).join('\n')}\n`;
+      }
+      text += `🤖 由「爸爸照護小幫手」生成`;
+
+      // Fallback copy using execCommand
+      const tempTextArea = document.createElement("textarea");
+      tempTextArea.value = text;
+      document.body.appendChild(tempTextArea);
+      tempTextArea.select();
+      try {
+        document.execCommand('copy');
+        showToast("已複製交接內容！可直接貼至 LINE 群組 📲");
+      } catch (err) {
+        showToast("複製失敗，請手動複製");
+      }
+      document.body.removeChild(tempTextArea);
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toastMessage');
+      const text = document.getElementById('toastText');
+      text.innerText = msg;
+      toast.classList.remove('translate-y-24', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      setTimeout(() => {
+        toast.classList.add('translate-y-24', 'opacity-0');
+        toast.classList.remove('translate-y-0', 'opacity-100');
+      }, 2500);
+    }
+
+    // Initialize on window load
+    window.addEventListener('load', () => {
+      initChecklist();
+      loadDailyNotice();
+      // Setup keyboard shortcuts
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          closeModal('detailModal');
+          closeModal('urgentNoticeModal');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
