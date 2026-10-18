@@ -177,6 +177,9 @@
         <button onclick="sendQuickMessage('尿管跟洗澡如廁')" class="px-2.5 py-1 rounded-full bg-white hover:bg-emerald-50 text-slate-600 hover:text-emerald-700 border border-slate-200 flex-shrink-0 transition-colors">
           🚿 如廁洗澡
         </button>
+        <button onclick="sendQuickMessage('每天喝水量與灌水配比')" class="px-2.5 py-1 rounded-full bg-white hover:bg-emerald-50 text-slate-600 hover:text-emerald-700 border border-slate-200 flex-shrink-0 transition-colors">
+          💧 喝水與配比
+        </button>
       </div>
 
       <!-- Chat Messages Container -->
@@ -241,7 +244,7 @@
       <div class="bg-slate-200/80 p-1.5 rounded-2xl flex items-center space-x-1 text-xs sm:text-sm font-semibold text-slate-600 select-none">
         <button id="tabBtn1" onclick="switchTab('modules')" class="flex-1 py-2 rounded-xl transition-all flex items-center justify-center space-x-1.5 tab-active">
           <i class="ph-bold ph-squares-four text-base"></i>
-          <span>六大模組懶人包</span>
+          <span>七大模組懶人包</span>
         </button>
         <button id="tabBtn2" onclick="switchTab('timeline')" class="flex-1 py-2 rounded-xl transition-all flex items-center justify-center space-x-1.5 hover:text-slate-900">
           <i class="ph-bold ph-clock-countdown text-base"></i>
@@ -276,8 +279,8 @@
               <!-- View mode -->
               <div id="noticeDisplayArea" class="mt-2 text-amber-800 text-xs sm:text-sm">
                 <ul id="noticeList" class="space-y-1 list-disc list-inside">
-                  <li><strong>中醫針灸：</strong> 原張醫師不在！請拿張醫師留的推薦名片，改抽名片推薦醫師號碼。</li>
-                  <li><strong>語言治療評估：</strong> 上午 09:00 需進行 <strong>PAC 語言能力評估</strong>，若與運動治療衝突自行調配。</li>
+                  <li><strong>語言治療死命令：</strong> 週三～週五 09:30 語言治療絕對不能遲到，若與物理治療衝突，以語言為主！</li>
+                  <li><strong>復健禁食鐵律：</strong> 平日上下午皆有復健，復健前後30分鐘絕對不可灌食，請彈性微調第 3 餐。</li>
                 </ul>
               </div>
 
@@ -305,14 +308,14 @@
               </span>
               <div>
                 <h4 class="font-bold text-slate-800 text-sm">一、每日標準作息表</h4>
-                <p class="text-xs text-slate-400">晨間擦澡、6餐灌食、睡前藥</p>
+                <p class="text-xs text-slate-400">早下午復健、語言治療優先</p>
               </div>
             </div>
             <p class="text-xs text-slate-600 leading-relaxed mb-3">
-              晨間 06:45 灌胃藥，07:00 第1餐。下午 15:00 走廊散步與自主訓練。全日灌 6 餐（末餐 21:30 加蛋白粉）。
+              平日 09:00-11:00、13:00-15:00 醫院復健。<strong>語言治療優先！</strong>頸部以上每日洗，頸部以下兩日一次。
             </p>
             <button onclick="openDetailModal('schedule')" class="w-full py-1.5 text-xs font-semibold text-blue-700 bg-blue-50 hover:bg-blue-100 rounded-xl transition-colors flex items-center justify-center space-x-1">
-              <span>查看詳細作息表</span>
+              <span>查看詳細 PAC 作息表</span>
               <i class="ph-bold ph-caret-right text-xs"></i>
             </button>
           </div>
@@ -325,21 +328,21 @@
               </span>
               <div>
                 <h4 class="font-bold text-slate-800 text-sm">二、中醫針灸排程</h4>
-                <p class="text-xs text-slate-400">週一至週三上午 / 週四下午</p>
+                <p class="text-xs text-slate-400">張醫師 / 陳醫師</p>
               </div>
             </div>
             <div class="text-xs text-slate-600 space-y-1 mb-3">
               <div class="flex justify-between py-0.5 border-b border-slate-100">
                 <span class="text-slate-500">週一 ～ 週三：</span>
-                <span class="font-medium text-slate-800">上午 08:30</span>
+                <span class="font-medium text-slate-800">上午 08:30 (張醫師)</span>
               </div>
               <div class="flex justify-between py-0.5 border-b border-slate-100">
                 <span class="text-slate-500">週四：</span>
-                <span class="font-medium text-amber-600">下午 13:30 (錯開第3餐)</span>
+                <span class="font-medium text-amber-600">下午 13:30 (張醫師)</span>
               </div>
-              <div class="flex justify-between py-0.5 text-red-600 font-semibold">
-                <span>10/16 (週五)：</span>
-                <span>持張醫師名片改抽推薦醫師</span>
+              <div class="flex justify-between py-0.5 text-slate-800">
+                <span class="text-slate-500">週五：</span>
+                <span class="font-medium">上午 11:00 (陳醫師)</span>
               </div>
             </div>
             <button onclick="openDetailModal('acupuncture')" class="w-full py-1.5 text-xs font-semibold text-purple-700 bg-purple-50 hover:bg-purple-100 rounded-xl transition-colors flex items-center justify-center space-x-1">
@@ -356,11 +359,11 @@
               </span>
               <div>
                 <h4 class="font-bold text-slate-800 text-sm">三、鼻胃管與給藥鐵律</h4>
-                <p class="text-xs text-slate-400">溶血藥彈性機制、坐姿30分</p>
+                <p class="text-xs text-slate-400">復健前後30分禁食、坐姿30分</p>
               </div>
             </div>
             <p class="text-xs text-slate-600 leading-relaxed mb-3">
-              💊 <strong>溶血藥注意：</strong>第1餐後護理師送來就先吃；若沒送來等復健後第2餐再吃。全天總水分需達 1500~2000cc。
+              💊 <strong>溶血藥注意：</strong>護理師送來就先吃；若沒送來等復健後第2餐再吃。<strong>復健前後30分鐘絕對不要灌食</strong>。
             </p>
             <button onclick="openDetailModal('medication')" class="w-full py-1.5 text-xs font-semibold text-rose-700 bg-rose-50 hover:bg-rose-100 rounded-xl transition-colors flex items-center justify-center space-x-1">
               <span>查看給藥與防逆流SOP</span>
@@ -368,19 +371,39 @@
             </button>
           </div>
 
-          <!-- Card 4: 吞嚥訓練 -->
+          <!-- Card 4: 每日水分補充 -->
+          <div class="bg-white rounded-2xl p-4 border border-slate-200/80 shadow-sm hover:shadow-md transition-shadow">
+            <div class="flex items-center space-x-3 mb-2.5">
+              <span class="w-8 h-8 rounded-xl bg-cyan-100 text-cyan-700 flex items-center justify-center font-bold text-base">
+                💧
+              </span>
+              <div>
+                <h4 class="font-bold text-slate-800 text-sm">四、每日水分補充與配比</h4>
+                <p class="text-xs text-slate-400">目標2000cc、標準公式、晨起增量</p>
+              </div>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed mb-3">
+              每次餵水務必記錄！餵奶藥「前後」皆需灌 120~150cc。晨起第一餐水量可多給（>150cc）以醒腦促蠕動。
+            </p>
+            <button onclick="openDetailModal('hydration')" class="w-full py-1.5 text-xs font-semibold text-cyan-700 bg-cyan-50 hover:bg-cyan-100 rounded-xl transition-colors flex items-center justify-center space-x-1">
+              <span>查看完整灌水 SOP</span>
+              <i class="ph-bold ph-caret-right text-xs"></i>
+            </button>
+          </div>
+
+          <!-- Card 5: 吞嚥訓練 -->
           <div class="bg-white rounded-2xl p-4 border border-slate-200/80 shadow-sm hover:shadow-md transition-shadow">
             <div class="flex items-center space-x-3 mb-2.5">
               <span class="w-8 h-8 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center font-bold text-base">
                 🍮
               </span>
               <div>
-                <h4 class="font-bold text-slate-800 text-sm">四、由口進食：吞嚥訓練</h4>
-                <p class="text-xs text-slate-400">及早拔除鼻胃管為目標！</p>
+                <h4 class="font-bold text-slate-800 text-sm">五、由口進食：吞嚥訓練</h4>
+                <p class="text-xs text-slate-400">及早拔管，做語言治療前提</p>
               </div>
             </div>
             <p class="text-xs text-slate-600 leading-relaxed mb-3">
-              每日餐間練1次。可吃布丁/豆腐/蒸蛋。<strong>絕對禁止稀飯與任何液體</strong>。每次半湯匙，務必叮嚀<strong>低頭吞嚥</strong>！
+              每日餐間練1次。可吃布丁/嫩豆腐。<strong>絕對禁止稀飯與任何液體</strong>。每次半湯匙，務必叮嚀<strong>低頭吞嚥</strong>！
             </p>
             <button onclick="openDetailModal('swallowing')" class="w-full py-1.5 text-xs font-semibold text-amber-700 bg-amber-50 hover:bg-amber-100 rounded-xl transition-colors flex items-center justify-center space-x-1">
               <span>查看餵食5步驟圖解</span>
@@ -388,19 +411,19 @@
             </button>
           </div>
 
-          <!-- Card 5: 復健與自主運動 -->
+          <!-- Card 6: 復健與自主運動 -->
           <div class="bg-white rounded-2xl p-4 border border-slate-200/80 shadow-sm hover:shadow-md transition-shadow">
             <div class="flex items-center space-x-3 mb-2.5">
               <span class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-base">
                 🏃
               </span>
               <div>
-                <h4 class="font-bold text-slate-800 text-sm">五、復健與病房自主訓練</h4>
-                <p class="text-xs text-slate-400">抬膝與站立平衡（安全死命令）</p>
+                <h4 class="font-bold text-slate-800 text-sm">六、復健與病房自主訓練</h4>
+                <p class="text-xs text-slate-400">雙重複健、週末自主練</p>
               </div>
             </div>
             <p class="text-xs text-slate-600 leading-relaxed mb-3">
-              平日上午 09:00~11:00 醫院復健。自主運動需在<strong>輪椅前壓重物</strong>，且身後務必貼身防摔！週末無復健更要自主練。
+              平日上下午皆有復健（語言優先！）。自主運動需在<strong>輪椅前壓重物</strong>，且身後務必貼身防摔！
             </p>
             <button onclick="openDetailModal('exercise')" class="w-full py-1.5 text-xs font-semibold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 rounded-xl transition-colors flex items-center justify-center space-x-1">
               <span>查看自主動作與防跌規範</span>
@@ -408,19 +431,19 @@
             </button>
           </div>
 
-          <!-- Card 6: 洗澡清潔與如廁 -->
+          <!-- Card 7: 洗澡清潔與如廁 -->
           <div class="bg-white rounded-2xl p-4 border border-slate-200/80 shadow-sm hover:shadow-md transition-shadow">
             <div class="flex items-center space-x-3 mb-2.5">
               <span class="w-8 h-8 rounded-xl bg-teal-100 text-teal-700 flex items-center justify-center font-bold text-base">
                 🚿
               </span>
               <div>
-                <h4 class="font-bold text-slate-800 text-sm">六、如廁清潔與護理</h4>
-                <p class="text-xs text-slate-400">尿管拔除排尿正常、右側防護</p>
+                <h4 class="font-bold text-slate-800 text-sm">七、洗澡、如廁與清潔護理</h4>
+                <p class="text-xs text-slate-400">排尿正常、分區洗澡</p>
               </div>
             </div>
             <p class="text-xs text-slate-600 leading-relaxed mb-3">
-              尿管已拔，排尿順暢。走廊行走需站<strong>右側防護</strong>。大便後確實擦乾淨並塗藥。上半身擦澡塗乳液，下半身浴室沖洗。
+              尿管已拔。走廊行走需在旁護著。頸部以上每日洗，頸部以下兩日一次。大便後擦淨並塗藥。
             </p>
             <button onclick="openDetailModal('hygiene')" class="w-full py-1.5 text-xs font-semibold text-teal-700 bg-teal-50 hover:bg-teal-100 rounded-xl transition-colors flex items-center justify-center space-x-1">
               <span>查看清潔護理細節</span>
@@ -434,10 +457,10 @@
       <div id="viewTimeline" class="hidden bg-white rounded-3xl p-5 border border-slate-200/90 shadow-sm">
         <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
           <div>
-            <h3 class="font-bold text-base text-slate-800">曾信士 每日作息全時間軸</h3>
-            <p class="text-xs text-slate-500">掌握關鍵 6 餐灌食與用藥時間窗口</p>
+            <h3 class="font-bold text-base text-slate-800">PAC 計畫 每日作息全時間軸</h3>
+            <p class="text-xs text-slate-500">掌握關鍵 6 餐、早下午復健與用藥時間窗口</p>
           </div>
-          <span class="text-xs bg-slate-100 text-slate-600 px-3 py-1 rounded-full font-medium">總液體目標: 1500-2000 cc</span>
+          <span class="text-xs bg-slate-100 text-slate-600 px-3 py-1 rounded-full font-medium">總液體目標: 2000 cc</span>
         </div>
 
         <div class="relative border-l-2 border-emerald-200 ml-4 pl-6 space-y-6 text-sm">
@@ -450,7 +473,7 @@
               <span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-rose-100 text-rose-800">藥物</span>
             </div>
             <p class="font-semibold text-slate-800 mt-0.5">灌「餐前胃藥」</p>
-            <p class="text-xs text-slate-500">以少量溫水沖灌，準備第一餐。</p>
+            <p class="text-xs text-slate-500">早起第一次餵水可增量至 150cc 以上。</p>
           </div>
 
           <!-- Item 2 -->
@@ -462,9 +485,9 @@
             </div>
             <p class="font-semibold text-slate-800 mt-0.5">【第 1 餐】 灌食 ＋ 晨間護理</p>
             <p class="text-xs text-slate-600 mt-1">
-              餐後擦臉、洗頭、塗臉部/皮膚藥膏、上半身擦澡塗乳液。<br>
+              餐後擦臉、洗頭、塗藥、擦澡塗乳液（頸部以上每日，頸下兩日一次）。<br>
               <span class="inline-block mt-1 p-1.5 bg-rose-50 text-rose-700 rounded-lg text-xs font-medium border border-rose-100">
-                💊 <strong>溶血藥注意：</strong>護理師若此時已送來，在去復健前先吃掉；若未送達，等復健完第 2 餐再吃。
+                💊 <strong>溶血藥注意：</strong>護理師若此時已送來，去復健前先吃掉；若未送達，等復健完第 2 餐再吃。
               </span>
             </p>
           </div>
@@ -473,8 +496,8 @@
           <div class="relative">
             <span class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-teal-500 border-2 border-white ring-2 ring-teal-200"></span>
             <span class="font-bold text-teal-800 text-xs sm:text-sm">07:30</span>
-            <p class="font-semibold text-slate-800 mt-0.5">帶去廁所如廁 ＋ 洗下半身</p>
-            <p class="text-xs text-slate-500">尿管已拔排尿正常；大便後務必擦乾淨並塗藥。浴室抹沐浴乳沖洗下半身。</p>
+            <p class="font-semibold text-slate-800 mt-0.5">帶去廁所如廁</p>
+            <p class="text-xs text-slate-500">尿管已拔排尿正常；大便後務必擦乾淨並塗藥膏。</p>
           </div>
 
           <!-- Item 4 -->
@@ -493,7 +516,7 @@
               <span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-purple-100 text-purple-800">中醫</span>
             </div>
             <p class="font-semibold text-slate-800 mt-0.5">中醫針灸（週一～週三）</p>
-            <p class="text-xs text-slate-500">⚠️ 週四改至下午 13:30；10/16 (週五) 請拿張醫師名片抽推薦醫師號。</p>
+            <p class="text-xs text-slate-500">張醫師針灸。⚠️ 週四改至下午 13:30。</p>
           </div>
 
           <!-- Item 6 -->
@@ -501,54 +524,79 @@
             <span class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-indigo-500 border-2 border-white ring-2 ring-indigo-200"></span>
             <div class="flex items-center space-x-2">
               <span class="font-bold text-indigo-800 text-xs sm:text-sm">09:00 - 11:00</span>
-              <span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-indigo-100 text-indigo-800">復健</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-indigo-100 text-indigo-800">上午復健</span>
             </div>
-            <p class="font-semibold text-slate-800 mt-0.5">醫院復健時段（週一～週五）</p>
+            <p class="font-semibold text-slate-800 mt-0.5">醫院復健：上午場（物理＋語言）</p>
             <p class="text-xs text-slate-600 mt-1">
-              物理治療（運動）＋ 語言治療（吞嚥/說話）。<br>
-              <span class="text-amber-700 font-semibold">⚠️ 10/16（五）09:00 有 PAC 語言能力評估！若重疊彈性調配。</span>
+              <span class="text-amber-700 font-semibold">⚠️ 語言治療死命令：週三～週五 09:30 語言治療絕對不能遲到，若重疊以語言優先！</span>
             </p>
           </div>
 
           <!-- Item 7 -->
           <div class="relative">
-            <span class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-emerald-500 border-2 border-white ring-2 ring-emerald-200"></span>
-            <div class="flex items-center space-x-2">
-              <span class="font-bold text-emerald-800 text-xs sm:text-sm">10:30 (或復健結束後半小時)</span>
-              <span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-100 text-emerald-800">第 2 餐</span>
-            </div>
-            <p class="font-semibold text-slate-800 mt-0.5">【第 2 餐】 ＋ 溶血藥（若早晨未吃）</p>
-            <p class="text-xs text-slate-500">吃完務必搖高床頭或維持坐姿休息 30 分鐘，方可平躺午休。</p>
+            <span class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-purple-500 border-2 border-white ring-2 ring-purple-200"></span>
+            <span class="font-bold text-purple-800 text-xs sm:text-sm">11:00 (週五)</span>
+            <p class="font-semibold text-slate-800 mt-0.5">中醫針灸（週五 陳醫師）</p>
+            <p class="text-xs text-slate-500">週五做完上午復健接著針灸。</p>
           </div>
 
           <!-- Item 8 -->
           <div class="relative">
             <span class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-emerald-500 border-2 border-white ring-2 ring-emerald-200"></span>
             <div class="flex items-center space-x-2">
-              <span class="font-bold text-emerald-800 text-xs sm:text-sm">13:30</span>
-              <span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-100 text-emerald-800">第 3 餐</span>
+              <span class="font-bold text-emerald-800 text-xs sm:text-sm">10:30 (或上午復健/針灸結束後半小時)</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-100 text-emerald-800">第 2 餐</span>
             </div>
-            <p class="font-semibold text-slate-800 mt-0.5">【第 3 餐】 灌食</p>
-            <p class="text-xs text-slate-500">⚠️ 週四因 13:30 有中醫針灸，此餐時間需微調提前或錯開。</p>
+            <p class="font-semibold text-slate-800 mt-0.5">【第 2 餐】 ＋ 溶血藥（若早晨未吃）</p>
+            <p class="text-xs text-slate-500">吃完務必搖高床頭或維持坐姿休息 30 分鐘，方可平躺午休。</p>
           </div>
-
+          
           <!-- Item 9 -->
           <div class="relative">
-            <span class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-amber-500 border-2 border-white ring-2 ring-amber-200"></span>
-            <span class="font-bold text-amber-800 text-xs sm:text-sm">15:00</span>
-            <p class="font-semibold text-slate-800 mt-0.5">病房走廊散步 ＋ 自主訓練 ＋ 吞嚥吃布丁</p>
-            <p class="text-xs text-slate-500">鼓勵下床走走（護右側），餐間練一次布丁吞嚥（低頭吞）。床邊扶輪椅抬膝。</p>
+            <span class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-indigo-500 border-2 border-white ring-2 ring-indigo-200"></span>
+            <div class="flex items-center space-x-2">
+              <span class="font-bold text-indigo-800 text-xs sm:text-sm">13:00 - 15:00 (平日)</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-indigo-100 text-indigo-800">下午復健</span>
+            </div>
+            <p class="font-semibold text-slate-800 mt-0.5">醫院復健：下午場</p>
           </div>
 
           <!-- Item 10 -->
+          <div class="relative">
+            <span class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-emerald-500 border-2 border-white ring-2 ring-emerald-200"></span>
+            <div class="flex items-center space-x-2">
+              <span class="font-bold text-emerald-800 text-xs sm:text-sm">13:30 (需微調)</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-100 text-emerald-800">第 3 餐</span>
+            </div>
+            <p class="font-semibold text-slate-800 mt-0.5">【第 3 餐】 灌食</p>
+            <p class="text-xs text-slate-500">⚠️ 平日需配合下午復健、且週四 13:30 有針灸，請依空檔提早或延後錯開（復健前後 30 分鐘禁食）。</p>
+          </div>
+
+          <!-- Item 11 -->
+          <div class="relative">
+            <span class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-amber-500 border-2 border-white ring-2 ring-amber-200"></span>
+            <span class="font-bold text-amber-800 text-xs sm:text-sm">15:00 (週末)</span>
+            <p class="font-semibold text-slate-800 mt-0.5">週末無復健：病房走廊散步 ＋ 自主訓練 ＋ 練吃布丁</p>
+            <p class="text-xs text-slate-500">鼓勵下床走走，餐間練一次布丁吞嚥（低頭吞）。床邊扶輪椅抬膝。</p>
+          </div>
+
+          <!-- Item 12 -->
           <div class="relative">
             <span class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-emerald-500 border-2 border-white ring-2 ring-emerald-200"></span>
             <span class="font-bold text-emerald-800 text-xs sm:text-sm">16:30 / 18:30</span>
             <p class="font-semibold text-slate-800 mt-0.5">【第 4、5 餐】 灌食</p>
             <p class="text-xs text-slate-500">每餐間隔約 2.5～3 小時，前後溫水沖管防塞管。</p>
           </div>
+          
+          <!-- Item 13 -->
+          <div class="relative">
+            <span class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-blue-400 border-2 border-white ring-2 ring-blue-200"></span>
+            <span class="font-bold text-blue-800 text-xs sm:text-sm">18:30 - 21:30</span>
+            <p class="font-semibold text-slate-800 mt-0.5">晚間散步與自主運動</p>
+            <p class="text-xs text-slate-500">鼓勵下床四處走走；平日白天已有兩場復健，晚上自主訓練加減做即可。</p>
+          </div>
 
-          <!-- Item 11 -->
+          <!-- Item 14 -->
           <div class="relative">
             <span class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-emerald-600 border-2 border-white ring-2 ring-emerald-300"></span>
             <div class="flex items-center space-x-2">
@@ -559,7 +607,7 @@
             <p class="text-xs text-slate-500">餵完坐姿維持 30 分鐘防胃食道逆流。</p>
           </div>
 
-          <!-- Item 12 -->
+          <!-- Item 15 -->
           <div class="relative">
             <span class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-slate-700 border-2 border-white ring-2 ring-slate-400"></span>
             <div class="flex items-center space-x-2">
@@ -591,7 +639,7 @@
             <input type="checkbox" id="chk_stomach" class="w-4 h-4 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500 mr-3">
             <div class="flex-1">
               <span class="font-semibold text-slate-800">06:45 晨間餐前胃藥</span>
-              <span class="block text-xs text-slate-400">溫水沖管給藥</span>
+              <span class="block text-xs text-slate-400">溫水沖管給藥（水可增量至150cc以上）</span>
             </div>
           </label>
 
@@ -600,7 +648,7 @@
             <input type="checkbox" id="chk_meal1" class="w-4 h-4 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500 mr-3">
             <div class="flex-1">
               <span class="font-semibold text-slate-800">07:00 【第 1 餐】 灌食完成</span>
-              <span class="block text-xs text-slate-400">包含洗頭、擦臉、上半身擦澡塗乳液</span>
+              <span class="block text-xs text-slate-400">含分區洗澡（頸部以上每日，頸部以下兩日一次）</span>
             </div>
           </label>
 
@@ -609,7 +657,7 @@
             <input type="checkbox" id="chk_blood" class="w-4 h-4 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500 mr-3">
             <div class="flex-1">
               <span class="font-semibold text-slate-800">溶血藥確認服下</span>
-              <span class="block text-xs text-slate-400">已確認送藥時程（復健前或復健後第 2 餐）</span>
+              <span class="block text-xs text-slate-400">已確認送藥時程（復健前或上午復健後第 2 餐）</span>
             </div>
           </label>
 
@@ -617,8 +665,8 @@
           <label class="flex items-center p-3 rounded-2xl bg-slate-50 hover:bg-slate-100/80 cursor-pointer border border-slate-100 transition">
             <input type="checkbox" id="chk_toilet" class="w-4 h-4 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500 mr-3">
             <div class="flex-1">
-              <span class="font-semibold text-slate-800">如廁與下半身清洗</span>
-              <span class="block text-xs text-slate-400">尿尿正常；大便擦淨並塗藥；陪伴站右側</span>
+              <span class="font-semibold text-slate-800">如廁清潔</span>
+              <span class="block text-xs text-slate-400">尿尿正常；大便擦淨並塗藥；陪伴站旁邊防護</span>
             </div>
           </label>
 
@@ -627,16 +675,16 @@
             <input type="checkbox" id="chk_acu" class="w-4 h-4 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500 mr-3">
             <div class="flex-1">
               <span class="font-semibold text-slate-800">中醫針灸（依當日排程）</span>
-              <span class="block text-xs text-slate-400">週一~三 08:30 / 週四 13:30 / 10/16 換名片抽號</span>
+              <span class="block text-xs text-slate-400">一~三 08:30(張) / 四 13:30(張) / 五 11:00(陳)</span>
             </div>
           </label>
 
           <!-- Item 6 -->
           <label class="flex items-center p-3 rounded-2xl bg-slate-50 hover:bg-slate-100/80 cursor-pointer border border-slate-100 transition">
-            <input type="checkbox" id="chk_rehab" class="w-4 h-4 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500 mr-3">
+            <input type="checkbox" id="chk_rehab_am" class="w-4 h-4 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500 mr-3">
             <div class="flex-1">
-              <span class="font-semibold text-slate-800">09:00-11:00 醫院復健（物理+語言）</span>
-              <span class="block text-xs text-slate-400">週五 09:00 PAC 語言評估；週末改病房自主訓練</span>
+              <span class="font-semibold text-slate-800">09:00-11:00 醫院復健 (上午場)</span>
+              <span class="block text-xs text-slate-400">三~五 09:30 語言治療優先！絕對不能遲到</span>
             </div>
           </label>
 
@@ -648,35 +696,44 @@
               <span class="block text-xs text-slate-400">吃完坐姿 30 分鐘再躺下</span>
             </div>
           </label>
-
+          
           <!-- Item 8 -->
           <label class="flex items-center p-3 rounded-2xl bg-slate-50 hover:bg-slate-100/80 cursor-pointer border border-slate-100 transition">
-            <input type="checkbox" id="chk_pudding" class="w-4 h-4 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500 mr-3">
+            <input type="checkbox" id="chk_rehab_pm" class="w-4 h-4 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500 mr-3">
             <div class="flex-1">
-              <span class="font-semibold text-slate-800">餐間布丁吞嚥自主訓練 1 次</span>
-              <span class="block text-xs text-slate-400">半湯匙、低頭吞、檢查無殘留</span>
+              <span class="font-semibold text-slate-800">13:00-15:00 醫院復健 (下午場) & 第3餐微調</span>
+              <span class="block text-xs text-slate-400">與下午復健/週四針灸錯開，復健前後30分禁食</span>
             </div>
           </label>
 
           <!-- Item 9 -->
           <label class="flex items-center p-3 rounded-2xl bg-slate-50 hover:bg-slate-100/80 cursor-pointer border border-slate-100 transition">
-            <input type="checkbox" id="chk_exercise" class="w-4 h-4 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500 mr-3">
+            <input type="checkbox" id="chk_pudding" class="w-4 h-4 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500 mr-3">
             <div class="flex-1">
-              <span class="font-semibold text-slate-800">病房自主運動（抬膝+站立平衡）</span>
-              <span class="block text-xs text-slate-400">輪椅前壓重物，後方有人貼身守護</span>
+              <span class="font-semibold text-slate-800">餐間布丁吞嚥自主訓練 1 次</span>
+              <span class="block text-xs text-slate-400">半湯匙、低頭吞、檢查無殘留 (語言治療前提)</span>
             </div>
           </label>
 
           <!-- Item 10 -->
           <label class="flex items-center p-3 rounded-2xl bg-slate-50 hover:bg-slate-100/80 cursor-pointer border border-slate-100 transition">
-            <input type="checkbox" id="chk_meals_afternoon" class="w-4 h-4 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500 mr-3">
+            <input type="checkbox" id="chk_exercise" class="w-4 h-4 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500 mr-3">
             <div class="flex-1">
-              <span class="font-semibold text-slate-800">午後灌食 【第 3、4、5 餐】</span>
-              <span class="block text-xs text-slate-400">間隔 2.5~3 小時，總液體量監測</span>
+              <span class="font-semibold text-slate-800">病房自主運動（抬膝+站立平衡）</span>
+              <span class="block text-xs text-slate-400">平日晚上加減做；週末務必做！輪椅前壓重物</span>
             </div>
           </label>
 
           <!-- Item 11 -->
+          <label class="flex items-center p-3 rounded-2xl bg-slate-50 hover:bg-slate-100/80 cursor-pointer border border-slate-100 transition">
+            <input type="checkbox" id="chk_meals_afternoon" class="w-4 h-4 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500 mr-3">
+            <div class="flex-1">
+              <span class="font-semibold text-slate-800">午後灌食 【第 4、5 餐】</span>
+              <span class="block text-xs text-slate-400">每餐紀錄水量，確保全天液體達 2000 cc</span>
+            </div>
+          </label>
+
+          <!-- Item 12 -->
           <label class="flex items-center p-3 rounded-2xl bg-slate-50 hover:bg-slate-100/80 cursor-pointer border border-slate-100 transition">
             <input type="checkbox" id="chk_meal6" class="w-4 h-4 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500 mr-3">
             <div class="flex-1">
@@ -685,7 +742,7 @@
             </div>
           </label>
 
-          <!-- Item 12 -->
+          <!-- Item 13 -->
           <label class="flex items-center p-3 rounded-2xl bg-slate-50 hover:bg-slate-100/80 cursor-pointer border border-slate-100 transition">
             <input type="checkbox" id="chk_night" class="w-4 h-4 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500 mr-3">
             <div class="flex-1">
@@ -756,76 +813,101 @@
     const CARE_KNOWLEDGE = {
       schedule: {
         title: "🕒 一、每日標準作息時間表",
-        badge: "生活作息",
+        badge: "PAC 計畫作息",
         color: "blue",
         html: `
           <div class="space-y-3 text-xs sm:text-sm text-slate-700 leading-relaxed">
-            <p><strong>• 06:45｜</strong>灌「餐前胃藥」</p>
-            <p><strong>• 07:00｜【第 1 餐】</strong> 餐後擦臉、洗頭、塗臉部/皮膚藥膏、上半身擦澡塗乳液。<br>
-               <span class="text-rose-600 font-semibold">💊 溶血藥注意：</span>若護理師在第 1 餐後就送來溶血藥，去復健前先吃；若還沒送來，就等復健回來吃第 2 餐時再吃。</p>
-            <p><strong>• 07:30｜</strong>帶去廁所（尿管已拔，排尿正常！大便後屁股務必擦乾淨並上藥；下半身可在浴室抹沐浴乳沖洗）。</p>
-            <p><strong>• 08:10｜</strong>休息／滑手機（抗生素已停，第 1 餐後休息滿半小時即可準備行程）。</p>
-            <p><strong>• 08:30｜</strong>【中醫針灸（週一～週三）】（週四改至 13:30）。</p>
-            <p><strong>• 09:00 - 11:00｜【醫院復健時段（週一～週五）】</strong> 物理治療（運動）＋語言治療（吞嚥/說話）。<br>
-               <span class="text-amber-700">⚠️ 10/16（五）09:00 PAC 語言評估，若時間重疊自行彈性調配先後。</span></p>
-            <p><strong>• 10:30 (或復健後30分)｜【第 2 餐】</strong> ＋ 餐後溶血藥（若早晨未吃）。吃完務必坐姿 30 分鐘再躺下午休。</p>
-            <p><strong>• 13:30｜【第 3 餐】</strong>（⚠️ 週四 13:30 有針灸需微調錯開）</p>
-            <p><strong>• 15:00｜</strong>病房走廊散步（下床走走，搭配病房自主訓練，餐間練一次吞嚥吃布丁）。</p>
-            <p><strong>• 16:30 / 18:30｜【第 4、5 餐】</strong>（間隔約 2.5～3 小時）</p>
-            <p><strong>• 21:30｜【第 6 餐（最後一餐）】</strong>（加蛋白粉，餵完維持坐姿半小時）</p>
-            <p><strong>• 22:30｜</strong>睡前吃「攝護腺藥」 ➔ 熄燈就寢。</p>
+            <p><strong>• 06:45｜</strong>灌「餐前胃藥」（早起第一次餵水可增量至 150cc 以上）</p>
+            <p><strong>• 07:00｜【第 1 餐】</strong> 餐後擦臉、洗頭、塗皮膚藥膏、擦澡塗乳液（頸部以上每日洗，頸部以下兩日一次）。<br>
+               <span class="text-rose-600 font-semibold">💊 溶血藥注意：</span>若護理師在第 1 餐後就送來溶血藥，就在去復健前先吃掉；若還沒送來，就等上午復健回來吃第 2 餐時再吃。</p>
+            <p><strong>• 07:30｜</strong>帶去廁所（尿管已拔除，排尿正常；大便後屁股務必擦乾淨並塗藥膏）。</p>
+            <p><strong>• 08:10｜</strong>休息／滑手機（抗生素已停，第 1 餐後休息滿半小時即可準備後續行程）。</p>
+            <p><strong>• 08:30｜</strong>【中醫針灸（週一～週三｜張醫師）】</p>
+            <p><strong>• 09:00 - 11:00｜【醫院復健：上午場（週一～週五）】</strong> 物理治療（運動）＋語言治療（吞嚥/說話）。<br>
+               <span class="text-amber-700 font-bold">⚠️ 語言治療死命令：週三～週五 09:30 為語言治療，天數較少且絕對不能遲到！若與物理治療重疊，一律以語言治療為優先，物理治療再彈性調配。</span></p>
+            <p><strong>• 11:00｜</strong>【中醫針灸（週五｜陳醫師）】（做完上午復健接著針灸）</p>
+            <p><strong>• 10:30 (或上午復健/針灸結束後半小時)｜【第 2 餐】</strong> ＋ 餐後溶血藥（若早上還沒吃的話）。吃完務必維持坐姿休息 30 分鐘再躺下午休。</p>
+            <p><strong>• 13:00 - 15:00｜【醫院復健：下午場（週一～週五）】</strong></p>
+            <p><strong>• 13:30 (需配合復健微調)｜【第 3 餐】</strong><br>
+               <span class="text-rose-600 font-bold">⚠️ 撞期注意：</span>平日 13:00-15:00 有下午場復健、且週四 13:30 有張醫師針灸，第 3 餐請務必依當日實際跑復健的空檔「提早或延後」錯開（嚴守復健前後 30 分鐘不灌食原則）。</p>
+            <p><strong>• 15:00 (週末)｜</strong>週末無醫院復健，安排病房走廊散步、下床四處走走＋病房自主訓練（餐與餐之間可練一次吞嚥吃布丁）。</p>
+            <p><strong>• 16:30 / 18:30｜【第 4、5 餐】</strong>（依交接時間，每餐間隔約 2.5～3 小時）</p>
+            <p><strong>• 18:30 - 21:30 間｜</strong>晚間散步與自主運動（鼓勵下床四處走走；平日白天已有兩場復健，晚上自主訓練加減做即可）。</p>
+            <p><strong>• 21:30｜【第 6 餐（最後一餐）】</strong>（加蛋白粉，餵完坐姿半小時）</p>
+            <p><strong>• 22:30｜</strong>睡前吃「攝護腺藥」 ➔ 熄燈就寢</p>
           </div>
         `
       },
       acupuncture: {
-        title: "🪡 二、中醫針灸排程與注意事項",
-        badge: "中醫針灸",
+        title: "🪡 二、中醫針灸固定排程",
+        badge: "張醫師/陳醫師",
         color: "purple",
         html: `
           <div class="space-y-3 text-xs sm:text-sm text-slate-700 leading-relaxed">
             <div class="p-3 bg-purple-50 rounded-xl border border-purple-200">
               <strong class="text-purple-900 block mb-1">📅 固定排程時間：</strong>
-              <ul class="list-disc list-inside space-y-1">
-                <li><strong>週一 ～ 週三：</strong> 上午 08:30</li>
-                <li><strong>週四：</strong> 下午 13:30（第 3 餐灌食需錯開）</li>
-                <li><strong>週五 ～ 週日：</strong> 無固定針灸（除 10/16 週五需代抽一次）</li>
+              <ul class="list-disc list-inside space-y-2">
+                <li><strong>週一 ～ 週三：</strong> 上午 08:30（張醫師）</li>
+                <li><strong>週四：</strong> 下午 13:30（張醫師｜<span class="text-rose-600 font-semibold">⚠️注意與第 3 餐及下午復健時間錯開</span>）</li>
+                <li><strong>週五：</strong> 上午 11:00（陳醫師）</li>
+                <li><strong>週六 ～ 週日：</strong> 無針灸</li>
               </ul>
-            </div>
-            <div class="p-3 bg-amber-50 rounded-xl border border-amber-200">
-              <strong class="text-amber-900 block mb-1">⚠️ 10/16（週五）特別注意：</strong>
-              <p>原本的張醫師不在！請拿張醫師給的推薦名片，改抽名片上推薦醫師的號碼牌！</p>
             </div>
           </div>
         `
       },
       medication: {
         title: "🍼 三、鼻胃管灌食與給藥鐵律",
-        badge: "用藥與防逆流",
+        badge: "PAC 用藥與防逆流",
         color: "rose",
         html: `
           <div class="space-y-3 text-xs sm:text-sm text-slate-700 leading-relaxed">
-            <p><strong>關鍵藥物時機：</strong></p>
+            <p><strong>1. 關鍵藥物時機：</strong></p>
             <ul class="list-disc list-inside space-y-1 pl-1">
-              <li><strong>06:45：</strong> 餐前胃藥（溫水沖管）。</li>
-              <li><strong>溶血藥（彈性）：</strong> 護理師第 1 餐後送來就在復健前吃；若未送達，等復健回來吃第 2 餐時再吃。</li>
+              <li><strong>06:45：</strong> 餐前胃藥。</li>
+              <li><strong>溶血藥（彈性）：</strong> 若護理師在第 1 餐後就送來，復健前先吃掉；若沒送來，等上午復健完回來吃第 2 餐時再吃。</li>
               <li><strong>睡前（約 22:00-22:30）：</strong> 攝護腺藥。</li>
             </ul>
             <div class="p-2.5 bg-rose-50 text-rose-800 rounded-xl border border-rose-200">
-              <strong>⛔ 復健前後禁食：</strong> 復健前只吃 07:00 第 1 餐。復健前 30 分鐘、復健後 30 分鐘內絕對不要灌食，防止劇烈運動造成嘔吐逆流。
+              <strong>⛔ 復健前後禁食：</strong> 復健前 30 分鐘、復健後 30 分鐘內絕對不要灌食，防運動時嘔吐逆流。
             </div>
             <div class="p-2.5 bg-blue-50 text-blue-800 rounded-xl border border-blue-200">
-              <strong>💺 防逆流坐姿：</strong> 每一餐灌完、吃完藥，都必須搖高床頭或坐姿維持至少 <strong>30 分鐘</strong> 才能平躺！
+              <strong>💺 防逆流坐姿：</strong> 每一餐灌完、吃完藥，都必須搖高床頭／坐姿維持至少 <strong>30 分鐘</strong> 才能平躺。
             </div>
-            <p><strong>💧 每日水分：</strong> 全天 6 罐補體素 ＋ 每餐前後溫水沖管，總液體量需達 <strong>1500～2000 cc</strong>。</p>
+          </div>
+        `
+      },
+      hydration: {
+        title: "💧 四、每日水分補充與灌食配比 SOP",
+        badge: "喝水配比",
+        color: "cyan",
+        html: `
+          <div class="space-y-3 text-xs sm:text-sm text-slate-700 leading-relaxed">
+            <div class="p-3 bg-cyan-50 rounded-xl border border-cyan-200">
+              <strong class="text-cyan-900 block mb-1">🎯 每日總水量目標：</strong>
+              <p>全天純水總量約 <strong>2000 cc</strong>（含 6 罐補體素與沖管水，<span class="text-rose-600 font-semibold">⚠️ 每次餵完水，請務必隨手記錄餵食的水量！</span>）</p>
+            </div>
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+              <strong class="text-slate-800 block mb-1">⚖️ 單次灌食標準配比（水 ➔ 奶/藥 ➔ 水）：</strong>
+              <ul class="list-disc list-inside space-y-1">
+                <li>餵奶、餵藥的「前後」，都要各灌 <strong>120 ～ 150 cc</strong> 的溫水。</li>
+                <li>👉 <strong>標準公式：</strong> 餐前水 120cc ➔ 補體素 240cc（1罐） ➔ 餐後水 120cc</li>
+              </ul>
+            </div>
+            <div class="p-3 bg-amber-50 rounded-xl border border-amber-200">
+              <strong class="text-amber-900 block mb-1">☀️ 晨起第一餐特別增量：</strong>
+              <p>早上起床的第一次餵水（06:45 胃藥／07:00 第 1 餐），水量可比平常多一點（拉高到 150cc 以上），像一般人早起喝溫水一樣，幫爸爸補充整晚流失的水分並促進腸胃蠕動。</p>
+            </div>
           </div>
         `
       },
       swallowing: {
-        title: "🍮 四、由口進食：吞嚥訓練 SOP",
-        badge: "目標：早日拔除鼻胃管",
+        title: "🍮 五、由口進食：吞嚥訓練 SOP",
+        badge: "目標及早拔管",
         color: "amber",
         html: `
           <div class="space-y-3 text-xs sm:text-sm text-slate-700 leading-relaxed">
+            <p><strong>目標：</strong> 及早拔除鼻胃管！訓練完吞嚥後，才會開始做語言治療。（每天餐與餐之間練 1 次）</p>
             <div class="grid grid-cols-2 gap-2 text-xs">
               <div class="p-2 bg-emerald-50 rounded-xl border border-emerald-200">
                 <span class="font-bold text-emerald-800 block">✅ 可吃軟固體</span>
@@ -833,58 +915,63 @@
               </div>
               <div class="p-2 bg-rose-50 rounded-xl border border-rose-200">
                 <span class="font-bold text-rose-800 block">❌ 絕對禁止（極易嗆傷）</span>
-                稀飯、帶湯水的食物、任何液體。
+                稀飯、帶湯水的食物。
               </div>
             </div>
             <p><strong>🥣 工具：</strong> 專用大支一點的湯匙（禁止用買布丁附的小塑膠匙）。</p>
             <div class="bg-amber-50/70 p-3 rounded-xl border border-amber-200">
               <strong class="text-amber-900 block mb-1">📋 餵食 5 步驟：</strong>
               <ol class="list-decimal list-inside space-y-1 text-slate-700">
-                <li><strong>聽聲音：</strong> 吃之前先跟爸對話，確認無痰音、口水音。</li>
-                <li><strong>看口腔：</strong> 請爸張嘴觀察口中情況，請他先試著吞一下口水。</li>
+                <li><strong>聽聲音：</strong> 吃之前先跟爸簡單對話，確認無痰音、口水音。</li>
+                <li><strong>看口腔：</strong> 請爸張嘴觀察口中情況，並請他先試吞一下口水。</li>
                 <li><strong>半湯匙：</strong> 每次取 <strong>半湯匙</strong> 食物送進嘴裡。</li>
-                <li><strong>低頭吞（最關鍵！）：</strong> 餵食者站著較高會害爸抬頭，務必叮嚀爸「低頭吞嚥」以防嗆傷。</li>
-                <li><strong>查殘留：</strong> 每吞完一口請爸張嘴檢查，確定吞乾淨再給下一口。</li>
+                <li><strong>低頭吞（最關鍵！）：</strong> 餵食者站著比爸高會害他抬頭，務必叮嚀爸「低頭吞嚥」防止嗆傷。</li>
+                <li><strong>查殘留：</strong> 每吞完一口請爸張嘴檢查口中有無殘留物，吞乾淨再給下一口。</li>
               </ol>
             </div>
           </div>
         `
       },
       exercise: {
-        title: "🏃 五、醫院復健與病房自主運動",
-        badge: "復健安全死命令",
+        title: "🏃 六、醫院復健與病房自主運動",
+        badge: "PAC 雙重複健",
         color: "emerald",
         html: `
           <div class="space-y-3 text-xs sm:text-sm text-slate-700 leading-relaxed">
-            <p><strong>時機分配：</strong></p>
-            <ul class="list-disc list-inside space-y-1">
-              <li><strong>平日（週一～週五）：</strong> 09:00-11:00 醫院復健（物理+語言），自主運動排在下午或晚上做。</li>
-              <li><strong>週末（週六、週日）：</strong> 醫院無復健課，請務必在病房自主訓練（早晚皆可分次做）！</li>
+            <p><strong>醫院復健（週一～週五）：</strong></p>
+            <ul class="list-disc list-inside space-y-1 mb-2">
+              <li>上午場 09:00 - 11:00 ／ 下午場 13:00 - 15:00</li>
+              <li class="text-amber-700 font-bold">⚠️ 週三～週五 上午 09:30 有語言治療，天數少且不容遲到！若有時間重疊，請以「語言治療」為主，自行調配物理治療時間。</li>
+            </ul>
+            <p><strong>病房自主訓練時機：</strong></p>
+            <ul class="list-disc list-inside space-y-1 mb-2">
+              <li><strong>平日：</strong> 白天上下午皆有醫院復健，排在晚上（18:30-21:30間）加減做即可，鼓勵多下床走走。</li>
+              <li><strong>週末：</strong> 週末醫院沒有復健課，請務必在病房做自主訓練（15:00 及晚上皆可分次做）並到走廊散步！</li>
             </ul>
             <div class="p-3 bg-red-50 text-red-900 rounded-xl border-2 border-red-200">
-              <strong>⚠️ 安全死命令（動作一：扶輪椅抬膝蓋）：</strong><br>
-              一次 20～30 下，做 2 輪。<br>
-              輪椅前面<strong>一定要有重物壓著避免翻車</strong>，且爸爸後面<strong>一定要有人貼身護著</strong>！
+              <strong>1. 扶輪椅抬膝蓋（一次 20～30 下，間歇式做 2 輪）：</strong><br>
+              ⚠️ 安全死命令： 輪椅前面一定要有重物壓著避免翻車，且爸爸後面一定要有人貼身護著！
             </div>
             <div class="p-3 bg-slate-50 text-slate-800 rounded-xl border border-slate-200">
-              <strong>動作二（站立平衡訓練）：</strong><br>
-              站著雙手自然垂下約 10～15 分鐘。可搭配手部動作：雙手向前握拳伸直、抬起到頭上、或用打棒球姿勢左右搖擺 10～15 下。
+              <strong>2. 站立平衡訓練：</strong><br>
+              站著雙手自然垂下約 10～15 分鐘。可配上手部動作：雙手向前握拳伸直、抬起到頭上、或用打棒球的姿勢左右搖擺 10～15 下。
             </div>
           </div>
         `
       },
       hygiene: {
-        title: "🚿 六、洗澡、如廁與清潔護理",
+        title: "🚿 七、洗澡、如廁與清潔護理",
         badge: "排尿正常",
         color: "teal",
         html: `
           <div class="space-y-3 text-xs sm:text-sm text-slate-700 leading-relaxed">
-            <p><strong>🚽 排尿狀態：</strong> 尿管已於 10/14 移除，目前自己尿尿都正常！（注意陪伴起身去廁所時，人要站在<strong>爸的右側</strong>貼身護著防跌倒）。</p>
-            <p><strong>🧻 大便清潔：</strong> 上完廁所務必把屁股擦乾淨並塗藥膏。</p>
-            <p><strong>🛁 洗澡方式：</strong></p>
+            <p><strong>🚽 排尿狀態：</strong> 尿管已於 10/14 移除，目前自己尿尿都正常！（<span class="text-rose-600 font-semibold">⚠️陪伴起身去廁所時，人要站在爸的旁邊護著防跌</span>）。</p>
+            <p><strong>🧻 大便清潔：</strong> 上完廁所都要把屁股擦乾淨並塗藥膏（目前濕疹情況已改善，現有藥膏塗完即可，不用再追加）。</p>
+            <p><strong>🛁 洗澡頻率與方式：</strong></p>
             <ul class="list-disc list-inside space-y-1 pl-1">
-              <li><strong>上半身：</strong> 第 1 餐後擦臉、洗頭、擦澡、塗乳液與上臉部/皮膚藥。</li>
-              <li><strong>下半身：</strong> 可直接在浴室抹沐浴乳後沖洗乾淨。</li>
+              <li><strong>頻率：</strong> 頸部以上（擦臉、洗頭）每日一次；頸部以下（身體擦澡、下半身沖洗）兩日一次，可視情況調整。</li>
+              <li><strong>上半身：</strong> 第 1 餐後擦臉、洗頭、擦澡、塗乳液與上藥。</li>
+              <li><strong>下半身：</strong> 可直接在浴室抹沐浴乳後沖洗。</li>
             </ul>
           </div>
         `
@@ -895,92 +982,86 @@
     function getBotResponse(userText) {
       const q = userText.toLowerCase().trim();
 
-      // 1. 作息 / 時間表
+      // 1. 作息 / 時間表 / 幾點
       if (q.includes('作息') || q.includes('時間表') || q.includes('幾點') || q.includes('行程') || q.includes('時間')) {
-        return `🩺 <strong>爸爸的一日作息時間表：</strong><br>
-• <strong>06:45</strong> 灌餐前胃藥<br>
-• <strong>07:00</strong> 【第1餐】＋洗漱擦澡塗藥（⚠️若溶血藥已送來，去復健前先吃）<br>
-• <strong>07:30</strong> 廁所＋洗下半身（尿管已拔，排尿正常）<br>
-• <strong>08:30</strong> 中醫針灸（週一～週三）<br>
-• <strong>09:00-11:00</strong> 醫院復健（運動＋語言）<br>
-• <strong>10:30</strong> 【第2餐】＋溶血藥（若早晨沒吃。吃完坐30分再睡）<br>
-• <strong>13:30</strong> 【第3餐】（⚠️週四13:30有針灸需微調）<br>
-• <strong>15:00</strong> 下床走走＋床邊自主運動＋練吃布丁<br>
-• <strong>16:30 / 18:30</strong> 依序餵第4、5餐<br>
-• <strong>21:30</strong> 【第6餐（末餐）】加蛋白粉，坐姿30分鐘<br>
-• <strong>22:30</strong> 睡前吃「攝護腺藥」➔ 熄燈睡覺`;
+        return `🤖 <strong>爸的 PAC 一日作息：</strong><br>
+• <strong>06:45</strong> 餐前胃藥（早起第一次水可多餵至150cc+）<br>
+• <strong>07:00</strong> 第1餐＋洗臉洗頭（每日）、擦澡洗下半身（兩日1次）。⚠️若溶血藥已送來，復健前先吃！<br>
+• <strong>07:30</strong> 上廁所（尿管已拔，陪走需在旁護著）<br>
+• <strong>08:30</strong> 中醫針灸（週一～三 張醫師）<br>
+• <strong>09:00-11:00</strong> 醫院復健上午場（⚠️週三～五 09:30 語言治療絕對不能遲到，優先去！週五 11:00 陳醫師針灸）<br>
+• <strong>10:30</strong>（或復健完半小時）第2餐＋溶血藥（坐半小時再睡）<br>
+• <strong>13:00-15:00</strong> 醫院復健下午場（平日）<br>
+• <strong>13:30</strong> 第3餐（⚠️平日需配合下午復健及週四13:30針灸微調錯開，復健前後30分鐘禁食）<br>
+• <strong>15:00</strong> 週末走廊散步＋自主訓練（餐間練吃1次布丁）<br>
+• <strong>16:30 / 18:30</strong> 第4、5餐<br>
+• <strong>18:30-21:30</strong> 下床走走＋病房自主訓練（平日晚上加減做）<br>
+• <strong>21:30</strong> 第6餐（加蛋白粉，坐半小時）<br>
+• <strong>22:30</strong> 睡前吃「攝護腺藥」➔ 睡覺`;
       }
 
-      // 2. 藥物 / 溶血藥 / 胃藥 / 攝護腺
-      if (q.includes('藥') || q.includes('溶血') || q.includes('胃藥') || q.includes('攝護腺') || q.includes('灌食') || q.includes('水') || q.includes('蛋白粉')) {
-        return `🩺 <strong>給藥與灌食重點：</strong><br>
-1. <strong>餐前胃藥：</strong> 06:45（第1餐前沖灌）。<br>
-2. <strong>溶血藥（彈性安排）：</strong> 若護理師在第1餐後送來，就在復健前先吃；若還沒送來，就等復健完第2餐再吃！<br>
-3. <strong>攝護腺藥：</strong> 睡前（22:30）吃。<br>
-4. <strong>⛔ 禁食鐵律：</strong> 復健前後30分鐘內不可餵食，預防嘔吐嗆咳！<br>
-5. <strong>💺 坐姿防逆流：</strong> 每一餐灌完或吃完藥，務必維持坐姿30分鐘再躺下。<br>
-6. <strong>全日水分：</strong> 6罐補體素＋餐前後溫水沖管，總水量需達 1500~2000 cc。`;
+      // 2. 復健 / 運動 / 語言 / 週末
+      if (q.includes('復健') || q.includes('運動') || q.includes('語言') || q.includes('週末') || q.includes('抬膝') || q.includes('平衡')) {
+        return `🤖 <strong>PAC 復健與病房自主訓練：</strong><br>
+1. <strong>醫院復健（週一～五）：</strong> 上午 09:00-11:00、下午 13:00-15:00。<br>
+2. ⚠️ <strong>最高原則：</strong> 週三～週五 09:30 語言治療天數少且不容遲到！若有重疊一律以語言治療為主！<br>
+3. <strong>病房自主運動時機：</strong> 平日上下午都有復健，排在「晚上(18:30-21:30)」加減做並下床走走；⚠️週末沒復健課，15:00及早晚務必在病房自主訓練！<br>
+4. <strong>動作1（扶輪椅抬膝）：</strong> 20-30下 × 2輪。⚠️輪椅前必須壓重物防翻車、爸身後必須有人貼身護著！<br>
+5. <strong>動作2（站立平衡）：</strong> 站10-15分鐘，配雙手前伸握拳、舉高過頭、打棒球左右搖擺10-15下。`;
       }
 
-      // 3. 針灸 / 中醫 / 張醫師 / 10/16
-      if (q.includes('針灸') || q.includes('中醫') || q.includes('張醫師') || q.includes('名片') || q.includes('10/16') || q.includes('十月十六')) {
-        return `🩺 <strong>中醫針灸時間表與注意事項：</strong><br>
-• <strong>週一 ～ 週三：</strong> 上午 08:30<br>
-• <strong>週四：</strong> 下午 13:30（與第3餐錯開）<br>
-• <strong>週五 ～ 週日：</strong> 平常無固定針灸。<br>
-<span class="text-rose-600 font-bold">⚠️ 特別注意：</span> 若遇原本張醫師休診不在，請拿張醫師留的<strong>推薦名片</strong>，改抽名片上推薦醫師的號碼牌！`;
+      // 3. 針灸 / 中醫 / 張醫師 / 陳醫師
+      if (q.includes('針灸') || q.includes('中醫') || q.includes('張醫師') || q.includes('陳醫師')) {
+        return `🤖 <strong>中醫針灸固定時間表：</strong><br>
+• <strong>週一 ～ 週三：</strong> 上午 08:30（張醫師）<br>
+• <strong>週四：</strong> 下午 13:30（張醫師｜<span class="text-rose-600 font-bold">⚠️注意與第3餐及下午復健錯開</span>）<br>
+• <strong>週五：</strong> 上午 11:00（陳醫師）<br>
+• <strong>週六 ～ 週日：</strong> 無針灸`;
       }
 
-      // 4. 布丁 / 吞嚥 / 吃東西 / 豆腐 / 豆花
+      // 4. 吃藥 / 溶血藥 / 攝護腺 / 灌食
+      if (q.includes('藥') || q.includes('溶血') || q.includes('胃藥') || q.includes('攝護腺') || q.includes('灌食') || q.includes('蛋白粉')) {
+        return `🤖 <strong>給藥與灌食鐵律：</strong><br>
+1. <strong>胃藥：</strong> 06:45（第1餐前）。<br>
+2. <strong>溶血藥：</strong> 若護理師在第1餐後就送來，去復健前先吃掉；若還沒送來，就上午復健完回來第2餐再吃。<br>
+3. <strong>攝護腺藥：</strong> 晚上 22:30 睡前吃。<br>
+4. <strong>安全鐵律：</strong> 復健前後 30 分鐘內絕對不可餵食！每餐灌完或吃完藥，務必搖高床頭／坐姿維持 30 分鐘再躺下。`;
+      }
+
+      // 5. 喝水 / 水量 / 灌水 / cc / 配比 (防呆:確保'水'不再抓去吃藥)
+      if (q.includes('水') || q.includes('喝水') || q.includes('水量') || q.includes('灌水') || q.includes('cc') || q.includes('配比') || q.includes('補體素')) {
+        return `🤖 <strong>爸的喝水與灌食配比 SOP：</strong><br>
+1. <strong>每日目標：</strong> 全天純水總量約 2000 cc（⚠️每次餵完水請務必隨手記錄水量！）。<br>
+2. <strong>每餐公式：</strong> 餵奶或餵藥「前後」都要灌 120~150cc 溫水。<br>
+3. 👉 <strong>標準配比：</strong> 120cc（水）＋ 240cc（補體素1罐）＋ 120cc（水）。<br>
+4. <strong>早起增量：</strong> 早上第一次餵水（06:45/07:00）可多給一點（150cc以上），像早起喝大溫水一樣幫爸補充水分、促腸胃蠕動！`;
+      }
+
+      // 6. 布丁 / 吞嚥 / 吃東西
       if (q.includes('布丁') || q.includes('吞嚥') || q.includes('吃') || q.includes('食物') || q.includes('嗆') || q.includes('稀飯')) {
-        return `🩺 <strong>吞嚥訓練 SOP（每天餐間練1次，早日拔鼻胃管）：</strong><br>
-• <strong>✅ 可吃軟固體：</strong> 統一布丁、嫩豆腐、豆花（必須把糖水全濾掉）、蒸蛋。<br>
-• <strong>❌ 絕對禁止：</strong> 稀飯、任何帶湯水食物（極易嗆傷吸入性肺炎）！<br>
-• <strong>🥣 工具：</strong> 大支專用湯匙（嚴禁小塑膠匙）。<br>
-• <strong>📋 餵食5步驟：</strong><br>
-1. <strong>聽聲音：</strong> 吃前先對話，確認無痰音/口水音。<br>
-2. <strong>看口腔：</strong> 張嘴檢查，請爸先吞一下口水。<br>
-3. <strong>半湯匙：</strong> 每口只餵半湯匙。<br>
-4. <strong>低頭吞（最關鍵！）：</strong> 務必提醒爸「低頭吞嚥」防嗆傷，站著餵容易害爸抬頭！<br>
-5. <strong>查殘留：</strong> 吞完張嘴確認吞乾淨，才餵下一口。`;
+        return `🤖 <strong>吞嚥訓練 SOP（每天餐間練1次，目標拔鼻胃管）：</strong><br>
+1. <strong>食物：</strong> 限軟固體（布丁、嫩豆腐、完全濾掉糖水的豆花、蒸蛋）。❌嚴禁稀飯與任何帶湯水食物！用大支一點的湯匙（禁布丁小塑膠匙）。<br>
+2. <strong>吃前檢查：</strong> 先對話確認無痰音/口水音 ➔ 張嘴檢查 ➔ 先試吞一下口水。<br>
+3. <strong>餵食動作：</strong> 每次半湯匙 ➔ 務必叮嚀爸「低頭吞嚥」防嗆傷 ➔ 每口吞完張嘴確認無殘留再給下一口。`;
       }
 
-      // 5. 復健 / 運動 / 週末 / 抬膝 / 翻車
-      if (q.includes('復健') || q.includes('運動') || q.includes('抬膝') || q.includes('輪椅') || q.includes('平衡') || q.includes('週末')) {
-        return `🩺 <strong>醫院復健與病房自主訓練安全指南：</strong><br>
-• <strong>平日醫院復健（週一～五 09:00-11:00）：</strong> 物理治療＋語言治療同時進行（若遇評估時間重疊請彈性調配）。<br>
-• <strong>床邊自主運動時機：</strong> 平日有去復健排在下午或晚上做；<strong>⚠️週末沒有復健課，請務必在病房自主訓練！</strong><br>
-• <strong>動作1【扶輪椅抬膝】：</strong> 20-30下 × 2輪。<br>
-  <span class="text-rose-600 font-bold">🚨 安全死命令：</span> 輪椅前方必須壓重物防翻車，爸身後必須有人貼身護著！<br>
-• <strong>動作2【站立平衡】：</strong> 站 10-15 分鐘，搭配雙手前伸握拳、舉過頭、打棒球左右搖擺10-15下。`;
-      }
-
-      // 6. 尿尿 / 廁所 / 洗澡 / 擦澡 / 屁股 / 尿管
-      if (q.includes('尿') || q.includes('廁所') || q.includes('洗澡') || q.includes('大便') || q.includes('擦澡') || q.includes('屁股') || q.includes('右側')) {
-        return `🩺 <strong>如廁與清潔護理指南：</strong><br>
-• <strong>排尿：</strong> 尿管已於 10/14 順利拔除，目前尿尿都正常！（陪伴起身去廁所時，人請站在爸的<strong>右側貼身護著</strong>防跌倒）。<br>
-• <strong>大便：</strong> 上完務必把屁股徹底擦乾淨並塗抹藥膏。<br>
-• <strong>洗澡：</strong> 早飯後上半身擦臉、洗頭、擦澡、塗乳液上藥；下半身直接進浴室抹沐浴乳沖洗。睡前記得吃攝護腺藥。`;
-      }
-
-      // 7. 交接 / 哥哥 / 評估 / pac
-      if (q.includes('交接') || q.includes('哥哥') || q.includes('pac') || q.includes('評估')) {
-        return `🩺 <strong>交接重點叮嚀：</strong><br>
-交接前請確認：<br>
-1. 09:00 PAC 語言能力評估（若遇排程重疊彈性調配）。<br>
-2. 中醫針灸若原醫師休診，拿張醫師名片抽推薦醫師號碼。<br>
-3. 溶血藥確認是否已送達與服用時段。<br>
-4. 今日灌食次數與補水總量是否達 1500~2000cc。`;
+      // 7. 尿尿 / 廁所 / 洗澡 / 擦澡 / 屁股 / 大便 / 藥膏
+      if (q.includes('尿') || q.includes('廁所') || q.includes('洗澡') || q.includes('大便') || q.includes('擦澡') || q.includes('屁股') || q.includes('藥膏')) {
+        return `🤖 <strong>如廁與清潔護理：</strong><br>
+• <strong>排尿：</strong> 尿管已拔除，目前自己尿尿都正常！（⚠️陪走去廁所時，人務必站在爸旁邊護著防跌）。<br>
+• <strong>大便：</strong> 上完廁所務必把屁股擦乾淨並塗藥膏（目前濕疹已改善，手邊藥膏塗完可不用再追加）。<br>
+• <strong>洗澡頻率：</strong> 頸部以上（洗臉、洗頭）每天1次；頸部以下（擦澡、浴室抹沐浴乳沖洗下半身）兩天1次，可視情況調整。`;
       }
 
       // Fallback Answer
-      return `🩺 我是爸爸照護小幫手！您可以試著換個關鍵字問我，例如：<br>
-• <strong>作息</strong>（時間表、幾點灌食）<br>
-• <strong>吃藥</strong>（溶血藥、胃藥、攝護腺藥）<br>
-• <strong>針灸</strong>（張醫師名片、週四下午時間）<br>
+      return `🤖 我是爸爸照護小幫手！您可以試著換個關鍵字問我，例如：<br>
+• <strong>作息</strong>（PAC計畫時間表、幾點灌食）<br>
+• <strong>復健</strong>（語言治療時間、週末自主運動）<br>
+• <strong>針灸</strong>（張醫師/陳醫師時間表）<br>
+• <strong>吃藥</strong>（溶血藥、胃藥、攝護腺藥、復健禁食）<br>
+• <strong>喝水</strong>（水量、灌水配比、補體素）<br>
 • <strong>布丁</strong>（吞嚥SOP、低頭吞、禁稀飯）<br>
-• <strong>復健</strong>（輪椅壓重物、週末自主運動）<br>
-• <strong>如廁</strong>（尿管已拔、右側防護、擦澡）`;
+• <strong>洗澡</strong>（分區洗澡、拔尿管、大便藥膏）`;
     }
 
     function appendUserMessage(text) {
@@ -1096,10 +1177,10 @@
     // Daily Notice LocalStorage & Dynamic Management
     const NOTICE_STORAGE_KEY = 'zeng_daily_notice_data';
     const DEFAULT_NOTICE = {
-      title: "10/16 (週五) 重點交接提醒事項",
+      title: "PAC 計畫重點交接提醒 (至11/26)",
       items: [
-        "中醫針灸：原張醫師不在！請拿張醫師留的推薦名片，改抽名片推薦醫師號碼。",
-        "語言治療評估：上午 09:00 需進行 PAC 語言能力評估，若與運動治療衝突自行調配。"
+        "語言治療死命令：週三～週五 09:30 語言治療絕對不能遲到，若與物理治療衝突，以語言為主！",
+        "復健禁食鐵律：平日上下午皆有復健，復健前後30分鐘絕對不可灌食，請彈性微調第 3 餐。"
       ]
     };
 
@@ -1249,20 +1330,21 @@
       const dateStr = new Date().toLocaleDateString('zh-TW', { month: 'numeric', day: 'numeric', weekday: 'short' });
       const items = [
         { id: 'chk_stomach', title: '06:45 餐前胃藥' },
-        { id: 'chk_meal1', title: '07:00 第1餐＋洗漱擦澡' },
+        { id: 'chk_meal1', title: '07:00 第1餐＋分區洗澡' },
         { id: 'chk_blood', title: '溶血藥服用' },
         { id: 'chk_toilet', title: '如廁洗下半身（尿尿正常/屁股擦藥）' },
-        { id: 'chk_acu', title: '中醫針灸' },
-        { id: 'chk_rehab', title: '09:00-11:00 醫院復健（物理+語言）' },
+        { id: 'chk_acu', title: '中醫針灸 (張醫師/陳醫師)' },
+        { id: 'chk_rehab_am', title: '09:00-11:00 上午復健（語言優先）' },
         { id: 'chk_meal2', title: '10:30 第2餐＋坐姿30分' },
+        { id: 'chk_rehab_pm', title: '13:00-15:00 下午復健 & 13:30 第3餐錯開' },
         { id: 'chk_pudding', title: '餐間布丁吞嚥練習' },
-        { id: 'chk_exercise', title: '病房自主運動（抬膝+平衡）' },
-        { id: 'chk_meals_afternoon', title: '午後第3、4、5餐灌食' },
+        { id: 'chk_exercise', title: '病房自主運動（晚間/週末）' },
+        { id: 'chk_meals_afternoon', title: '午後第4、5餐灌食' },
         { id: 'chk_meal6', title: '21:30 第6餐＋蛋白粉' },
         { id: 'chk_night', title: '22:30 睡前攝護腺藥＆就寢' }
       ];
 
-      let text = `📋【曾信士 照護交接進度 — ${dateStr}】\n\n`;
+      let text = `📋【曾信士 PAC 照護交接進度 — ${dateStr}】\n\n`;
       let completedCount = 0;
 
       items.forEach(item => {
